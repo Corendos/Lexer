@@ -154,3 +154,12 @@ std::set<State> NFA::epsilonClosure(const std::set<State>& states) const {
 
     return closure;
 }
+
+std::set<State> NFA::computeStartingState() const {
+    std::set<State> nfaStartingStates;
+    std::copy_if(mStates.begin(), mStates.end(),
+                 std::inserter(nfaStartingStates, nfaStartingStates.begin()),
+                 [](const State& state) { return state.isStarting; });
+    
+    return epsilonClosure(nfaStartingStates);
+}

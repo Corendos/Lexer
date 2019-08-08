@@ -25,7 +25,9 @@ class NFA {
         void addTransition(const State& from, /*       Empty         */  const State& to);
 
         void printDebug() const;
+        // TODO: make private
         std::set<State> epsilonClosure(const std::set<State>& states) const;
+        std::set<State> computeStartingState() const;
 
     private:
         Alphabet mAlphabet;
