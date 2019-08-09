@@ -155,11 +155,141 @@ std::set<State> NFA::epsilonClosure(const std::set<State>& states) const {
     return closure;
 }
 
-std::set<State> NFA::computeStartingState() const {
+std::set<size_t> NFA::epsilonClosureIndex(const std::set<State>& states) const {
+    using MarkedState = std::pair<size_t, bool>;
+
+    // This is the set of state that are being explored
+    std::vector<MarkedState> markedStatesSet;
+
+    // First we set all the input states as not marked and convert to
+    // an index representation
+    std::transform(states.begin(), states.end(),
+                   std::back_inserter(markedStatesSet),
+                   [this](const State& s) {
+                       auto it = std::find(mStates.begin(), mStates.end(), s);
+                       assert(it != mStates.end());
+                       size_t index = std::distance(mStates.begin(), it);
+                       return std::make_pair(index, false);
+                   });
+
+    // We find the first state that is not marked
+    auto it = std::find_if(markedStatesSet.begin(), markedStatesSet.end(),
+                           [](const MarkedState& ms) { return !ms.second; });
+
+    // While there are not marked states
+    while (it != markedStatesSet.end()) {
+        size_t stateIndex = it->first;
+
+        // We get the list or reachable states if it exists
+        auto reachableIt = mEmptyTransitionTable.find(stateIndex);
+        if (reachableIt != mEmptyTransitionTable.end()) {
+            // For each target state
+            for (const size_t& toIndex : reachableIt->second) {
+                    // We check if it is not already in the marked state set, and insert
+                    // it if not
+                    auto tempIt = std::find_if(markedStatesSet.begin(), markedStatesSet.end(),
+                                               [&toIndex](const MarkedState& ms) { return ms.first == toIndex; });
+                    if (tempIt == markedStatesSet.end()) {
+                        markedStatesSet.push_back(std::make_pair(toIndex, false));
+                    }
+                }
+        }
+
+        // We set this state as marked and look for another state to explore
+        it->second = true;
+
+        it = std::find_if(markedStatesSet.begin(), markedStatesSet.end(),
+                          [](const MarkedState& ms) { return !ms.second; });
+    }
+
+    // We copy the marked set that is the epsilon-closure of the input states
+    std::set<size_t> closure;
+    std::transform(markedStatesSet.begin(), markedStatesSet.end(),
+                   std::inserter(closure, closure.begin()),
+                   [this](const MarkedState& ms) { return ms.first; });
+
+    return closure;
+}
+
+std::set<size_t> NFA::computeStartingState() const {
     std::set<State> nfaStartingStates;
     std::copy_if(mStates.begin(), mStates.end(),
                  std::inserter(nfaStartingStates, nfaStartingStates.begin()),
                  [](const State& state) { return state.isStarting; });
     
-    return epsilonClosure(nfaStartingStates);
+    return epsilonClosureIndex(nfaStartingStates);
+}
+
+void NFA::computeNewStates() const {
+    using MarkedStateSet = std::pair<std::set<size_t>, bool>;
+    std::map<std::pair<size_t, CharType>, size_t> mNewCharacterTransitionTable;
+
+    std::vector<MarkedStateSet> markedStateSetsSet;
+    markedStateSetsSet.push_back(std::make_pair(computeStartingState(), false));
+
+    auto it = std::find_if(markedStateSetsSet.begin(), markedStateSetsSet.end(),
+                           [](const MarkedStateSet& ms) { return !ms.second; });
+    
+    size_t currentNewStateIndex = 0;
+    while (it != markedStateSetsSet.end()) {
+        std::cout << "S'" << currentNewStateIndex << " { ";
+        for (const size_t& index : it->first) {
+            std::cout << mStates.at(index).name << " ";
+        }
+        std::cout << "}" << std::endl;
+        for (const CharType& c : mAlphabet) {
+            std::cout << "Looking for new temp set" << std::endl;
+            std::set<State> newTempSet;
+            for (const size_t& fromIndex : it->first) {
+                auto transitionIt = mCharacterTransitionTable.find(std::make_pair(fromIndex, c));
+                if (transitionIt != mCharacterTransitionTable.end()) {
+                    newTempSet.insert(mStates.at(transitionIt->second));
+                }
+            }
+
+            std::cout << "New temp set { ";
+            for (const State& state : newTempSet) {
+                std::cout << state.name << " ";
+            }
+            std::cout << "}" << std::endl;
+
+            std::set<size_t> newSet = epsilonClosureIndex(newTempSet);
+            std::cout << "New set { ";
+            for (const size_t& index : newSet) {
+                std::cout << mStates.at(index).name << " ";
+            }
+            std::cout << "}" << std::endl;
+            
+            if (newSet.empty()) {
+                it = std::find_if(markedStateSetsSet.begin(), markedStateSetsSet.end(),
+                                [](const MarkedStateSet& ms) { return !ms.second; });
+                currentNewStateIndex++;
+                continue;
+            }
+
+            auto toSetIt = std::find_if(markedStateSetsSet.begin(), markedStateSetsSet.end(),
+                                        [&newSet](const MarkedStateSet& ms) { return ms.first == newSet; });
+            if (toSetIt == markedStateSetsSet.end()) {
+                std::cout << "New set is not in the list " << std::endl;
+                markedStateSetsSet.push_back(std::make_pair(newSet, false));
+                toSetIt = markedStateSetsSet.end()--;
+            }
+
+            std::cout << "Adding the transition " << std::endl;
+            size_t toNewStateIndex = std::distance(markedStateSetsSet.begin(), toSetIt);
+            mNewCharacterTransitionTable.insert(std::make_pair(std::make_pair(currentNewStateIndex, c), toNewStateIndex));
+            std::cout << "End " << std::endl;
+        }
+
+        it = std::find_if(markedStateSetsSet.begin(), markedStateSetsSet.end(),
+                          [](const MarkedStateSet& ms) { return !ms.second; });
+        currentNewStateIndex++;
+    }
+
+    for (const auto& [key, value] : mNewCharacterTransitionTable) {
+        const size_t& from = key.first;
+        const CharType& character = key.second;
+        const size_t& to = value;
+        std::cout << "\t" << from << " <-- " << character << " --> " << to << std::endl;
+    }
 }

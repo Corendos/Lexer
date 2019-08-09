@@ -27,7 +27,9 @@ class NFA {
         void printDebug() const;
         // TODO: make private
         std::set<State> epsilonClosure(const std::set<State>& states) const;
-        std::set<State> computeStartingState() const;
+        std::set<size_t> epsilonClosureIndex(const std::set<State>& states) const;
+        std::set<size_t> computeStartingState() const;
+        void computeNewStates() const;
 
     private:
         Alphabet mAlphabet;

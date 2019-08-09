@@ -40,11 +40,6 @@ int main() {
     statesSet.insert(s5);
     statesSet.insert(s2);
 
-    std::set<State> epsilonClosure = nfa.epsilonClosure(statesSet);
-
-    for (const auto& e : epsilonClosure) {
-        std::cout << e.name << " ";
-    }
-    std::cout << std::endl;
+    nfa.computeNewStates();
     return 0;
 }
