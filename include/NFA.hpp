@@ -15,6 +15,9 @@ using CharType = Alphabet::value_type;
 class NFA {
     public:
         NFA(const Alphabet& alphabet);
+        NFA(const std::vector<State>& states,
+            const std::map<std::pair<size_t, CharType>, size_t>& characterTransitionTable,
+            const Alphabet& alphabet);
         NFA(NFA& other) = delete;
         NFA(NFA&& other) = delete;
         NFA& operator=(NFA& other) = delete;
@@ -29,7 +32,7 @@ class NFA {
         std::set<State> epsilonClosure(const std::set<State>& states) const;
         std::set<size_t> epsilonClosureIndex(const std::set<State>& states) const;
         std::set<size_t> computeStartingState() const;
-        void computeNewStates() const;
+        NFA computeNewStates() const;
 
     private:
         Alphabet mAlphabet;

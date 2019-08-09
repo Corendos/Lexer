@@ -8,6 +8,12 @@
 NFA::NFA(const Alphabet& alphabet) : mAlphabet{alphabet} {
 }
 
+NFA::NFA(const std::vector<State>& states,
+         const std::map<std::pair<size_t, CharType>, size_t>& characterTransitionTable,
+         const Alphabet& alphabet) : mCharacterTransitionTable(characterTransitionTable),
+        mStates(states), mAlphabet(alphabet) {
+}
+
 void NFA::addState(const State& state) {
     if (exists(state)) {
         throw std::runtime_error("This states already exists");
@@ -220,9 +226,9 @@ std::set<size_t> NFA::computeStartingState() const {
     return epsilonClosureIndex(nfaStartingStates);
 }
 
-void NFA::computeNewStates() const {
+NFA NFA::computeNewStates() const {
     using MarkedStateSet = std::pair<std::set<size_t>, bool>;
-    std::map<std::pair<size_t, CharType>, size_t> mNewCharacterTransitionTable;
+    std::map<std::pair<size_t, CharType>, size_t> newCharacterTransitionTable;
 
     std::vector<MarkedStateSet> markedStateSetsSet;
     markedStateSetsSet.push_back(std::make_pair(computeStartingState(), false));
@@ -232,13 +238,7 @@ void NFA::computeNewStates() const {
     
     size_t currentNewStateIndex = 0;
     while (it != markedStateSetsSet.end()) {
-        std::cout << "S'" << currentNewStateIndex << " { ";
-        for (const size_t& index : it->first) {
-            std::cout << mStates.at(index).name << " ";
-        }
-        std::cout << "}" << std::endl;
         for (const CharType& c : mAlphabet) {
-            std::cout << "Looking for new temp set" << std::endl;
             std::set<State> newTempSet;
             for (const size_t& fromIndex : it->first) {
                 auto transitionIt = mCharacterTransitionTable.find(std::make_pair(fromIndex, c));
@@ -247,49 +247,47 @@ void NFA::computeNewStates() const {
                 }
             }
 
-            std::cout << "New temp set { ";
-            for (const State& state : newTempSet) {
-                std::cout << state.name << " ";
-            }
-            std::cout << "}" << std::endl;
-
             std::set<size_t> newSet = epsilonClosureIndex(newTempSet);
-            std::cout << "New set { ";
-            for (const size_t& index : newSet) {
-                std::cout << mStates.at(index).name << " ";
-            }
-            std::cout << "}" << std::endl;
             
             if (newSet.empty()) {
-                it = std::find_if(markedStateSetsSet.begin(), markedStateSetsSet.end(),
-                                [](const MarkedStateSet& ms) { return !ms.second; });
-                currentNewStateIndex++;
                 continue;
             }
 
             auto toSetIt = std::find_if(markedStateSetsSet.begin(), markedStateSetsSet.end(),
                                         [&newSet](const MarkedStateSet& ms) { return ms.first == newSet; });
             if (toSetIt == markedStateSetsSet.end()) {
-                std::cout << "New set is not in the list " << std::endl;
                 markedStateSetsSet.push_back(std::make_pair(newSet, false));
-                toSetIt = markedStateSetsSet.end()--;
+                it = std::find_if(markedStateSetsSet.begin(), markedStateSetsSet.end(),
+                                  [](const MarkedStateSet& ms) { return !ms.second; });
+                toSetIt = --markedStateSetsSet.end();
             }
 
-            std::cout << "Adding the transition " << std::endl;
             size_t toNewStateIndex = std::distance(markedStateSetsSet.begin(), toSetIt);
-            mNewCharacterTransitionTable.insert(std::make_pair(std::make_pair(currentNewStateIndex, c), toNewStateIndex));
-            std::cout << "End " << std::endl;
+            newCharacterTransitionTable.insert(std::make_pair(std::make_pair(currentNewStateIndex, c), toNewStateIndex));
         }
+
+        it->second = true;
 
         it = std::find_if(markedStateSetsSet.begin(), markedStateSetsSet.end(),
                           [](const MarkedStateSet& ms) { return !ms.second; });
         currentNewStateIndex++;
     }
 
-    for (const auto& [key, value] : mNewCharacterTransitionTable) {
-        const size_t& from = key.first;
-        const CharType& character = key.second;
-        const size_t& to = value;
-        std::cout << "\t" << from << " <-- " << character << " --> " << to << std::endl;
+    std::vector<State> states;
+    for (const auto& entry : markedStateSetsSet) {
+        State s{"S" + std::to_string(states.size())};
+
+        if (states.size() == 0) {
+            s.isStarting = true;
+        }
+
+        if (std::find_if(entry.first.begin(), entry.first.end(),
+                         [this](const size_t& index) { return mStates.at(index).isAccepting; }) != entry.first.end()) {
+            s.isAccepting = true;
+        }
+
+        states.push_back(s);
     }
+
+    return NFA(states, newCharacterTransitionTable, mAlphabet);
 }
