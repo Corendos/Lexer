@@ -13,6 +13,7 @@ using Alphabet = std::string;
 using CharType = Alphabet::value_type;
 
 class NFA {
+    using MarkedStateSet = std::pair<std::set<size_t>, bool>;
     public:
         NFA(const Alphabet& alphabet);
         NFA(const std::vector<State>& states,
@@ -30,9 +31,11 @@ class NFA {
         void printDebug() const;
         // TODO: make private
         std::set<State> epsilonClosure(const std::set<State>& states) const;
+        std::set<State> epsilonClosure(const std::set<size_t>& states) const;
         std::set<size_t> epsilonClosureIndex(const std::set<State>& states) const;
+        std::set<size_t> epsilonClosureIndex(const std::set<size_t>& states) const;
         std::set<size_t> computeStartingState() const;
-        NFA computeNewStates() const;
+        NFA toDFA() const;
 
     private:
         Alphabet mAlphabet;
@@ -42,6 +45,9 @@ class NFA {
         std::vector<State> mStates;
 
         bool exists(const State& state);
+        std::set<size_t> findReachableStates(const std::set<size_t>& startingState,
+                                             const CharType& c) const;
+        std::vector<State> computeNewStates(const std::vector<MarkedStateSet>& markedStateSetsSet) const;
 };
 
 #endif
