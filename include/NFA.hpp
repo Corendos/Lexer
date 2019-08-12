@@ -13,6 +13,7 @@ using Alphabet = std::string;
 using CharType = Alphabet::value_type;
 
 class NFA {
+    using MarkedState = std::pair<size_t, bool>;
     using MarkedStateSet = std::pair<std::set<size_t>, bool>;
     public:
         NFA(const Alphabet& alphabet);
@@ -48,6 +49,7 @@ class NFA {
         std::set<size_t> findReachableStates(const std::set<size_t>& startingState,
                                              const CharType& c) const;
         std::vector<State> computeNewStates(const std::vector<MarkedStateSet>& markedStateSetsSet) const;
+        static bool isStateMarked(const MarkedState& ms);
 };
 
 #endif

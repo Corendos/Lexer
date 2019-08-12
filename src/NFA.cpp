@@ -106,8 +106,6 @@ bool NFA::exists(const State& state) {
 }
 
 std::set<State> NFA::epsilonClosure(const std::set<State>& states) const {
-    using MarkedState = std::pair<size_t, bool>;
-
     // This is the set of state that are being explored
     std::vector<MarkedState> markedStatesSet;
 
@@ -123,8 +121,7 @@ std::set<State> NFA::epsilonClosure(const std::set<State>& states) const {
                    });
 
     // We find the first state that is not marked
-    auto it = std::find_if(markedStatesSet.begin(), markedStatesSet.end(),
-                           [](const MarkedState& ms) { return !ms.second; });
+    auto it = std::find_if_not(markedStatesSet.begin(), markedStatesSet.end(), isStateMarked);
 
     // While there are not marked states
     while (it != markedStatesSet.end()) {
@@ -148,8 +145,7 @@ std::set<State> NFA::epsilonClosure(const std::set<State>& states) const {
         // We set this state as marked and look for another state to explore
         it->second = true;
 
-        it = std::find_if(markedStatesSet.begin(), markedStatesSet.end(),
-                          [](const MarkedState& ms) { return !ms.second; });
+        it = std::find_if_not(markedStatesSet.begin(), markedStatesSet.end(), isStateMarked);
     }
 
     // We copy the marked set that is the epsilon-closure of the input states
@@ -162,22 +158,16 @@ std::set<State> NFA::epsilonClosure(const std::set<State>& states) const {
 }
 
 std::set<State> NFA::epsilonClosure(const std::set<size_t>& states) const {
-    using MarkedState = std::pair<size_t, bool>;
-
     // This is the set of state that are being explored
     std::vector<MarkedState> markedStatesSet;
 
     // First we set all the input states as not marked and convert to
     // an index representation
-    std::transform(states.begin(), states.end(),
-                   std::back_inserter(markedStatesSet),
-                   [](const size_t& index) {
-                       return std::make_pair(index, false);
-                   });
+    std::transform(states.begin(), states.end(), std::back_inserter(markedStatesSet),
+                   [](const size_t& index) { return std::make_pair(index, false); });
 
     // We find the first state that is not marked
-    auto it = std::find_if(markedStatesSet.begin(), markedStatesSet.end(),
-                           [](const MarkedState& ms) { return !ms.second; });
+    auto it = std::find_if_not(markedStatesSet.begin(), markedStatesSet.end(), isStateMarked);
 
     // While there are not marked states
     while (it != markedStatesSet.end()) {
@@ -201,8 +191,7 @@ std::set<State> NFA::epsilonClosure(const std::set<size_t>& states) const {
         // We set this state as marked and look for another state to explore
         it->second = true;
 
-        it = std::find_if(markedStatesSet.begin(), markedStatesSet.end(),
-                          [](const MarkedState& ms) { return !ms.second; });
+        it = std::find_if_not(markedStatesSet.begin(), markedStatesSet.end(), isStateMarked);
     }
 
     // We copy the marked set that is the epsilon-closure of the input states
@@ -215,8 +204,6 @@ std::set<State> NFA::epsilonClosure(const std::set<size_t>& states) const {
 }
 
 std::set<size_t> NFA::epsilonClosureIndex(const std::set<State>& states) const {
-    using MarkedState = std::pair<size_t, bool>;
-
     // This is the set of state that are being explored
     std::vector<MarkedState> markedStatesSet;
 
@@ -232,8 +219,7 @@ std::set<size_t> NFA::epsilonClosureIndex(const std::set<State>& states) const {
                    });
 
     // We find the first state that is not marked
-    auto it = std::find_if(markedStatesSet.begin(), markedStatesSet.end(),
-                           [](const MarkedState& ms) { return !ms.second; });
+    auto it = std::find_if_not(markedStatesSet.begin(), markedStatesSet.end(), isStateMarked);
 
     // While there are not marked states
     while (it != markedStatesSet.end()) {
@@ -257,22 +243,19 @@ std::set<size_t> NFA::epsilonClosureIndex(const std::set<State>& states) const {
         // We set this state as marked and look for another state to explore
         it->second = true;
 
-        it = std::find_if(markedStatesSet.begin(), markedStatesSet.end(),
-                          [](const MarkedState& ms) { return !ms.second; });
+        it = std::find_if_not(markedStatesSet.begin(), markedStatesSet.end(), isStateMarked);
     }
 
     // We copy the marked set that is the epsilon-closure of the input states
     std::set<size_t> closure;
     std::transform(markedStatesSet.begin(), markedStatesSet.end(),
                    std::inserter(closure, closure.begin()),
-                   [this](const MarkedState& ms) { return ms.first; });
+                   [](const MarkedState& ms) { return ms.first; });
 
     return closure;
 }
 
 std::set<size_t> NFA::epsilonClosureIndex(const std::set<size_t>& states) const {
-    using MarkedState = std::pair<size_t, bool>;
-
     // This is the set of state that are being explored
     std::vector<MarkedState> markedStatesSet;
 
@@ -285,8 +268,7 @@ std::set<size_t> NFA::epsilonClosureIndex(const std::set<size_t>& states) const 
                    });
 
     // We find the first state that is not marked
-    auto it = std::find_if(markedStatesSet.begin(), markedStatesSet.end(),
-                           [](const MarkedState& ms) { return !ms.second; });
+    auto it = std::find_if_not(markedStatesSet.begin(), markedStatesSet.end(), isStateMarked);
 
     // While there are not marked states
     while (it != markedStatesSet.end()) {
@@ -310,8 +292,7 @@ std::set<size_t> NFA::epsilonClosureIndex(const std::set<size_t>& states) const 
         // We set this state as marked and look for another state to explore
         it->second = true;
 
-        it = std::find_if(markedStatesSet.begin(), markedStatesSet.end(),
-                          [](const MarkedState& ms) { return !ms.second; });
+        it = std::find_if_not(markedStatesSet.begin(), markedStatesSet.end(), isStateMarked);
     }
 
     // We copy the marked set that is the epsilon-closure of the input states
@@ -335,35 +316,48 @@ std::set<size_t> NFA::computeStartingState() const {
 NFA NFA::toDFA() const {
     std::vector<MarkedStateSet> markedStateSetsSet;
     std::map<std::pair<size_t, CharType>, size_t> newCharacterTransitionTable;
+
+    // Compute the starting state
     markedStateSetsSet.push_back(std::make_pair(computeStartingState(), false));
     
+    // While there are not marked states
     size_t currentIndex = 0;
-    
     while (currentIndex < markedStateSetsSet.size()) {
+        // For each letter of the alphabet
         for (const CharType& c : mAlphabet) {
+            // Find the reachable state using the letter c and the current state
             std::set<size_t> newSet = findReachableStates(markedStateSetsSet.at(currentIndex).first, c);
             
+            // If there are no reachable state, continue to the next letter
             if (newSet.empty()) {
                 continue;
             }
 
+            // Try to find if the current state already is in the state set list
             auto toSetIt = std::find_if(markedStateSetsSet.begin(), markedStateSetsSet.end(),
                                         [&newSet](const MarkedStateSet& ms) { return ms.first == newSet; });
+            
+            // If not, create it
             if (toSetIt == markedStateSetsSet.end()) {
                 markedStateSetsSet.push_back(std::make_pair(newSet, false));
                 toSetIt = --markedStateSetsSet.end();
             }
 
+            // Store the transition in the transition table
             size_t toNewStateIndex = std::distance(markedStateSetsSet.begin(), toSetIt);
             newCharacterTransitionTable.insert(std::make_pair(std::make_pair(currentIndex, c), toNewStateIndex));
         }
 
+        // Mark the current state as marked, and go to the next one
+        // NOTE: what if somehow, the next state is aleady marked ?
         markedStateSetsSet.at(currentIndex).second = true;
         currentIndex++;
     }
 
+    // Compute the new states from the state sets
     std::vector<State> states = computeNewStates(markedStateSetsSet);
 
+    // Return a NFA which is a DFA
     return NFA(states, newCharacterTransitionTable, mAlphabet);
 }
 
@@ -399,4 +393,8 @@ std::vector<State> NFA::computeNewStates(const std::vector<MarkedStateSet>& mark
     }
 
     return states;
+}
+
+bool NFA::isStateMarked(const MarkedState& ms) {
+    return ms.second;
 }
