@@ -3,17 +3,20 @@
 #include <NFA.hpp>
 
 int main() {
-    Alphabet alphabet{"abcd"};
-    NFA nfa{alphabet};
+    Alphabet alphabet{"abc"};
+    NFA<TokenInfo> nfa{alphabet};
 
-    State s1("S1", false, true);
-    State s2("S2");
-    State s3("S3");
-    State s4("S4", true);
-    State s5("S5");
-    State s6("S6");
-    State s7("S7");
-    State s8("S8");
+    std::vector<TokenInfo> tokenInfo1 = {TokenInfo("identifier", 10)};
+    std::vector<TokenInfo> tokenInfo2 = {TokenInfo("number", 10)};
+
+    State<std::vector<TokenInfo>> s1("S1", std::vector<TokenInfo>(), false, true);
+    State<std::vector<TokenInfo>> s2("S2");
+    State<std::vector<TokenInfo>> s3("S3");
+    State<std::vector<TokenInfo>> s4("S4", tokenInfo1, true);
+    State<std::vector<TokenInfo>> s5("S5");
+    State<std::vector<TokenInfo>> s6("S6");
+    State<std::vector<TokenInfo>> s7("S7", tokenInfo2, true);
+    State<std::vector<TokenInfo>> s8("S8");
 
     nfa.addState(s1);
     nfa.addState(s2);
@@ -34,12 +37,7 @@ int main() {
     nfa.addTransition(s7, 'b', s8);
     nfa.addTransition(s8, s1);
 
-    nfa.printDebug();
-
-    std::set<State> statesSet;
-    statesSet.insert(s5);
-    statesSet.insert(s2);
-
-    nfa.computeNewStates();
+    NFA<TokenInfo> dfa = nfa.toDFA();
+    dfa.printDebug();
     return 0;
 }
