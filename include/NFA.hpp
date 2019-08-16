@@ -35,6 +35,8 @@ class NFA {
         void addTransition(const State<StatePayload>& from, /*       Empty         */  const State<StatePayload>& to);
         void addTransitions(const State<StatePayload>& from, const Alphabet& characters, const State<StatePayload>& to);
 
+        std::vector<TokenInfo> find(const std::string& word) const;
+
         void printDebug() const;
         // TODO: make private
         std::set<State<StatePayload>> epsilonClosure(const std::set<State<StatePayload>>& states) const;

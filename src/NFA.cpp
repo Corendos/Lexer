@@ -1,5 +1,7 @@
 #include "NFA.hpp"
 
+#include <cassert>
+
 NFA::NFA(const Alphabet& alphabet) : mAlphabet{alphabet} {
 }
 
@@ -61,6 +63,26 @@ void NFA::addTransitions(const State<StatePayload>& from, const Alphabet& charac
     for (const auto& c : characters) {
         addTransition(from, c, to);
     }
+}
+
+std::vector<TokenInfo> NFA::find(const std::string& word) const {
+    auto it = std::find_if(mStates.begin(), mStates.end(),
+                           [](const State<StatePayload>& state) { return state.isStarting; });
+    assert(it != mStates.end());
+
+    size_t nextIndex = std::distance(mStates.begin(), it);
+    State<StatePayload> nextState = mStates.at(nextIndex);
+
+    for (const char& c : word) {
+        std::pair<size_t, CharType> key = std::make_pair(nextIndex, c);
+        auto transitionIt = mCharacterTransitionTable.find(key);
+        assert(transitionIt != mCharacterTransitionTable.end());
+
+        nextIndex = transitionIt->second;
+        nextState = mStates.at(nextIndex);
+    }
+
+    return nextState.payload.tokenInfos;
 }
 
 void NFA::printDebug() const {
