@@ -70,12 +70,12 @@ void NFA::printDebug() const {
     for (const State<StatePayload>& state : mStates) {
         std::cout << "\t" << state.name;
 
-        if (state.isAccepting)
+        if (state.isStarting)
             std::cout << " (x)";
         else
             std::cout << " ( )";
 
-        if (state.isStarting)
+        if (state.isAccepting)
             std::cout << " (x)";
         else
             std::cout << " ( )";
