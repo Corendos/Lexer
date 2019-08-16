@@ -57,6 +57,12 @@ void NFA::addTransition(const State<StatePayload>& from, const State<StatePayloa
     }
 }
 
+void NFA::addTransitions(const State<StatePayload>& from, const Alphabet& characters, const State<StatePayload>& to) {
+    for (const auto& c : characters) {
+        addTransition(from, c, to);
+    }
+}
+
 void NFA::printDebug() const {
     if (!mStates.empty())
         std::cout << "States:" << std::endl;

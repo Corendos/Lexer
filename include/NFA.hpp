@@ -33,6 +33,7 @@ class NFA {
         void addState(const State<StatePayload>& state);
         void addTransition(const State<StatePayload>& from, const CharType& character, const State<StatePayload>& to);
         void addTransition(const State<StatePayload>& from, /*       Empty         */  const State<StatePayload>& to);
+        void addTransitions(const State<StatePayload>& from, const Alphabet& characters, const State<StatePayload>& to);
 
         void printDebug() const;
         // TODO: make private
