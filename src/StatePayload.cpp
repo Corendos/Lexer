@@ -16,10 +16,10 @@ StatePayload StatePayload::concatenate(const StatePayload& a, const StatePayload
 StatePayload StatePayload::concatenate(const std::vector<StatePayload>& statePayloads) {
     size_t finalSize{0};
     std::for_each(statePayloads.begin(), statePayloads.end(),
-                  [&finalSize](const StatePayload& payload) { return payload.tokenInfos.size(); });
+                  [&finalSize](const StatePayload& payload) { finalSize += payload.tokenInfos.size(); });
     std::vector<TokenInfo> tokenInfos{finalSize};
 
-    StatePayload::ConstIterator it = tokenInfos.begin();
+    StatePayload::Iterator it = tokenInfos.begin();
     std::for_each(statePayloads.begin(), statePayloads.end(),
                   [&it](const StatePayload& payload) {
                       it = std::copy(payload.tokenInfos.begin(), payload.tokenInfos.end(), it);

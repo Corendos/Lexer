@@ -398,15 +398,12 @@ std::vector<State<StatePayload>> NFA::computeNewStates(const std::vector<MarkedS
             std::copy_if(entry.first.begin(), entry.first.end(),
                          std::back_inserter(acceptingStates),
                          [this](const size_t& index) { return mStates.at(index).isAccepting; });
-            StatePayload payload;
-            std::for_each(acceptingStates.begin(), acceptingStates.end(),
-                          [&tokenInfos, this](const size_t& acceptingStateIndex) {
-                              const State<StatePayload>& acceptingState = mStates.at(acceptingStateIndex);
-                              std::copy(acceptingState.payload.tokenInfos.begin(), acceptingState.payload.tokenInfos.end(),
-                                        std::back_inserter(tokenInfos));
-                          });
+            std::vector<StatePayload> initialPayloads;
+            std::transform(acceptingStates.begin(), acceptingStates.end(),
+                           std::back_inserter(initialPayloads),
+                           [this](const size_t& index) { return mStates.at(index).payload; });
             s.isAccepting = true;
-            s.payload = tokenInfos;
+            s.payload = StatePayload::concatenate(initialPayloads);
         }
 
         states.push_back(s);
