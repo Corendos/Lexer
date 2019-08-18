@@ -1,5 +1,8 @@
 #include "State.hpp"
 
+State::State() : State("") {
+}
+
 State::State(const std::string& name, const StatePayload& payload, bool accepting, bool starting) :
     name(name), isAccepting(accepting), isStarting(starting), payload(payload) {
 }

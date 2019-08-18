@@ -2,29 +2,30 @@
 #include <chrono>
 
 #include "NFA.hpp"
+#include "Traverser.hpp"
 
 int main() {
     Alphabet alphabet{"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.+-"};
     NFA nfa{alphabet};
 
-    State<StatePayload> s1{"S1", StatePayload(), false, true};
-    State<StatePayload> s2{"S2"};
-    State<StatePayload> s3{"S3"};
-    State<StatePayload> s4{"S4", StatePayload{{{"IF", 10}}}, true};
-    State<StatePayload> s5{"S5"};
-    State<StatePayload> s6{"S6", StatePayload{{{"ID", 10}}}, true};
-    State<StatePayload> s7{"S7"};
-    State<StatePayload> s8{"S8"};
-    State<StatePayload> s9{"S9", StatePayload{{{"NUM", 10}}}, true};
-    State<StatePayload> s10{"S10"};
-    State<StatePayload> s11{"S11"};
-    State<StatePayload> s12{"S12", StatePayload{{{"FLOAT", 10}}}, true};
-    State<StatePayload> s13{"S13", StatePayload{{{"FLOAT", 10}}}, true};
-    State<StatePayload> s14{"S14"};
-    State<StatePayload> s15{"S15", StatePayload{{{"FLOAT", 10}}}, true};
-    State<StatePayload> s16{"S16"};
-    State<StatePayload> s17{"S17"};
-    State<StatePayload> s18{"S18", StatePayload{{{"FLOAT", 10}}}, true};
+    State s1{"S1", StatePayload(), false, true};
+    State s2{"S2"};
+    State s3{"S3"};
+    State s4{"S4", StatePayload{{{"IF", 20}}}, true};
+    State s5{"S5"};
+    State s6{"S6", StatePayload{{{"ID", 10}}}, true};
+    State s7{"S7"};
+    State s8{"S8"};
+    State s9{"S9", StatePayload{{{"NUM", 20}}}, true};
+    State s10{"S10"};
+    State s11{"S11"};
+    State s12{"S12", StatePayload{{{"FLOAT", 10}}}, true};
+    State s13{"S13", StatePayload{{{"FLOAT", 10}}}, true};
+    State s14{"S14"};
+    State s15{"S15", StatePayload{{{"FLOAT", 10}}}, true};
+    State s16{"S16"};
+    State s17{"S17"};
+    State s18{"S18", StatePayload{{{"FLOAT", 10}}}, true};
 
     nfa.addState(s1);
     nfa.addState(s2);
@@ -77,16 +78,35 @@ int main() {
     nfa.addTransitions(s17, "0123456789", s18);
     nfa.addTransition(s18, s17);
 
-    //nfa.printDebug();
-
-    auto start = std::chrono::high_resolution_clock::now();
     NFA dfa = nfa.toDFA();
-    dfa.printDebug();
-    auto end = std::chrono::high_resolution_clock::now();
+    Traverser traverser(dfa);
 
-    uint64_t nanoseconds = std::chrono::duration<uint64_t, std::nano>(end - start).count();
-    uint64_t microseconds = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
-    std::cout << nanoseconds << " ns" << std::endl;
-    std::cout << microseconds << " µs" << std::endl;
-    return 0;
+    std::string input = "3e-y";
+
+    State lastValidState;
+    size_t lastRestartCharacterIndex = 0;
+
+    size_t currentIndex = 0;
+    size_t startCharacterIndex = 0;
+
+    std::vector<std::string> tokens;
+
+    while(currentIndex < input.length()) {
+        CharType& c = input.at(currentIndex);
+        auto [found, state] = traverser.next(c);
+        if (found) {
+            if (state.isAccepting) {
+                lastRestartCharacterIndex = currentIndex + 1;
+                lastValidState = state;
+            }
+            currentIndex++;
+        } else {
+            //TODO: what if the string is empty ? If the first transition does not exist ?
+            std::string newToken = std::string(input, startCharacterIndex, lastRestartCharacterIndex - startCharacterIndex);
+            tokens.push_back(newToken);
+            currentIndex = lastRestartCharacterIndex;
+            startCharacterIndex = lastRestartCharacterIndex;
+            traverser.reset();
+        }
+    }
 }

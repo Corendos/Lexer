@@ -6,6 +6,7 @@
 #include "StatePayload.hpp"
 
 struct State {
+    State();
     State(const std::string& name,
           const StatePayload& payload = StatePayload(),
           bool accepting = false,

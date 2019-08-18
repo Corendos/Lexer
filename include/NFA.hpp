@@ -40,6 +40,8 @@ class NFA {
         void printDebug() const;
         NFA toDFA() const;
 
+        friend class Traverser;
+
     private:
         Alphabet mAlphabet;
 
