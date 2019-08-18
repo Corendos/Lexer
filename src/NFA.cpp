@@ -5,13 +5,13 @@
 NFA::NFA(const Alphabet& alphabet) : mAlphabet{alphabet} {
 }
 
-NFA::NFA(const std::vector<State<StatePayload>>& states,
+NFA::NFA(const std::vector<State>& states,
          const std::map<std::pair<size_t, CharType>, size_t>& characterTransitionTable,
          const Alphabet& alphabet) : mCharacterTransitionTable(characterTransitionTable),
         mStates(states), mAlphabet(alphabet) {
 }
 
-void NFA::addState(const State<StatePayload>& state) {
+void NFA::addState(const State& state) {
     if (exists(state)) {
         throw std::runtime_error("This states already exists");
     }
@@ -19,7 +19,7 @@ void NFA::addState(const State<StatePayload>& state) {
     mStates.push_back(state);
 }
 
-void NFA::addTransition(const State<StatePayload>& from, const CharType& character, const State<StatePayload>& to) {
+void NFA::addTransition(const State& from, const CharType& character, const State& to) {
     if (std::find(mAlphabet.begin(), mAlphabet.end(), character) == mAlphabet.end()) {
         throw std::runtime_error("The alphabet must contain the transition character");
     }
@@ -39,7 +39,7 @@ void NFA::addTransition(const State<StatePayload>& from, const CharType& charact
     mCharacterTransitionTable.emplace(std::make_pair(std::make_pair(fromIndex, character), toIndex));
 }
 
-void NFA::addTransition(const State<StatePayload>& from, const State<StatePayload>& to) {
+void NFA::addTransition(const State& from, const State& to) {
     const auto& fromIt = std::find(mStates.begin(), mStates.end(), from);
     if (fromIt == mStates.end()) {
         throw std::runtime_error("The 'from' state must exist");
@@ -59,7 +59,7 @@ void NFA::addTransition(const State<StatePayload>& from, const State<StatePayloa
     }
 }
 
-void NFA::addTransitions(const State<StatePayload>& from, const Alphabet& characters, const State<StatePayload>& to) {
+void NFA::addTransitions(const State& from, const Alphabet& characters, const State& to) {
     for (const auto& c : characters) {
         addTransition(from, c, to);
     }
@@ -67,11 +67,11 @@ void NFA::addTransitions(const State<StatePayload>& from, const Alphabet& charac
 
 std::vector<TokenInfo> NFA::find(const std::string& word) const {
     auto it = std::find_if(mStates.begin(), mStates.end(),
-                           [](const State<StatePayload>& state) { return state.isStarting; });
+                           [](const State& state) { return state.isStarting; });
     assert(it != mStates.end());
 
     size_t nextIndex = std::distance(mStates.begin(), it);
-    State<StatePayload> nextState = mStates.at(nextIndex);
+    State nextState = mStates.at(nextIndex);
 
     for (const char& c : word) {
         std::pair<size_t, CharType> key = std::make_pair(nextIndex, c);
@@ -89,7 +89,7 @@ void NFA::printDebug() const {
     if (!mStates.empty())
         std::cout << "States:" << std::endl;
 
-    for (const State<StatePayload>& state : mStates) {
+    for (const State& state : mStates) {
         std::cout << "\t" << state.name;
 
         if (state.isStarting)
@@ -104,7 +104,7 @@ void NFA::printDebug() const {
         
         if (!state.payload.tokenInfos.empty()) {
             for (const TokenInfo& e : state.payload.tokenInfos) {
-                std::cout << " " << e.type;
+                std::cout << " " << e.type << "(" << e.priority << ")";
             }
         }
 
@@ -130,11 +130,11 @@ void NFA::printDebug() const {
     }
 }
 
-bool NFA::exists(const State<StatePayload>& state) {
+bool NFA::exists(const State& state) {
     return std::find(mStates.begin(), mStates.end(), state) != mStates.end();
 }
 
-std::set<State<StatePayload>> NFA::epsilonClosure(const std::set<State<StatePayload>>& states) const {
+std::set<State> NFA::epsilonClosure(const std::set<State>& states) const {
     // This is the set of state that are being explored
     std::vector<MarkedState> markedStatesSet;
 
@@ -142,7 +142,7 @@ std::set<State<StatePayload>> NFA::epsilonClosure(const std::set<State<StatePayl
     // an index representation
     std::transform(states.begin(), states.end(),
                    std::back_inserter(markedStatesSet),
-                   [this](const State<StatePayload>& s) {
+                   [this](const State& s) {
                        auto it = std::find(mStates.begin(), mStates.end(), s);
                        assert(it != mStates.end());
                        size_t index = std::distance(mStates.begin(), it);
@@ -178,7 +178,7 @@ std::set<State<StatePayload>> NFA::epsilonClosure(const std::set<State<StatePayl
     }
 
     // We copy the marked set that is the epsilon-closure of the input states
-    std::set<State<StatePayload>> closure;
+    std::set<State> closure;
     std::transform(markedStatesSet.begin(), markedStatesSet.end(),
                    std::inserter(closure, closure.begin()),
                    [this](const MarkedState& ms) { return mStates.at(ms.first); });
@@ -186,7 +186,7 @@ std::set<State<StatePayload>> NFA::epsilonClosure(const std::set<State<StatePayl
     return closure;
 }
 
-std::set<State<StatePayload>> NFA::epsilonClosure(const std::set<size_t>& states) const {
+std::set<State> NFA::epsilonClosure(const std::set<size_t>& states) const {
     // This is the set of state that are being explored
     std::vector<MarkedState> markedStatesSet;
 
@@ -224,7 +224,7 @@ std::set<State<StatePayload>> NFA::epsilonClosure(const std::set<size_t>& states
     }
 
     // We copy the marked set that is the epsilon-closure of the input states
-    std::set<State<StatePayload>> closure;
+    std::set<State> closure;
     std::transform(markedStatesSet.begin(), markedStatesSet.end(),
                    std::inserter(closure, closure.begin()),
                    [this](const MarkedState& ms) { return mStates.at(ms.first); });
@@ -232,7 +232,7 @@ std::set<State<StatePayload>> NFA::epsilonClosure(const std::set<size_t>& states
     return closure;
 }
 
-std::set<size_t> NFA::epsilonClosureIndex(const std::set<State<StatePayload>>& states) const {
+std::set<size_t> NFA::epsilonClosureIndex(const std::set<State>& states) const {
     // This is the set of state that are being explored
     std::vector<MarkedState> markedStatesSet;
 
@@ -240,7 +240,7 @@ std::set<size_t> NFA::epsilonClosureIndex(const std::set<State<StatePayload>>& s
     // an index representation
     std::transform(states.begin(), states.end(),
                    std::back_inserter(markedStatesSet),
-                   [this](const State<StatePayload>& s) {
+                   [this](const State& s) {
                        auto it = std::find(mStates.begin(), mStates.end(), s);
                        assert(it != mStates.end());
                        size_t index = std::distance(mStates.begin(), it);
@@ -334,10 +334,10 @@ std::set<size_t> NFA::epsilonClosureIndex(const std::set<size_t>& states) const 
 }
 
 std::set<size_t> NFA::computeStartingState() const {
-    std::set<State<StatePayload>> nfaStartingStates;
+    std::set<State> nfaStartingStates;
     std::copy_if(mStates.begin(), mStates.end(),
                  std::inserter(nfaStartingStates, nfaStartingStates.begin()),
-                 [](const State<StatePayload>& state) { return state.isStarting; });
+                 [](const State& state) { return state.isStarting; });
     
     return epsilonClosureIndex(nfaStartingStates);
 }
@@ -384,7 +384,7 @@ NFA NFA::toDFA() const {
     }
 
     // Compute the new states from the state sets
-    std::vector<State<StatePayload>> states = computeNewStates(markedStateSetsSet);
+    std::vector<State> states = computeNewStates(markedStateSetsSet);
 
     // Return a NFA which is a DFA
     return NFA(states, newCharacterTransitionTable, mAlphabet);
@@ -404,10 +404,10 @@ std::set<size_t> NFA::findReachableStates(const std::set<size_t>& startingState,
     return newSet;
 }
 
-std::vector<State<StatePayload>> NFA::computeNewStates(const std::vector<MarkedStateSet>& markedStateSetsSet) const {
-    std::vector<State<StatePayload>> states;
+std::vector<State> NFA::computeNewStates(const std::vector<MarkedStateSet>& markedStateSetsSet) const {
+    std::vector<State> states;
     for (const auto& entry : markedStateSetsSet) {
-        State<StatePayload> s{"S" + std::to_string(states.size())};
+        State s{"S" + std::to_string(states.size())};
 
         if (states.size() == 0) {
             s.isStarting = true;

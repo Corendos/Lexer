@@ -22,7 +22,7 @@ class NFA {
     using MarkedStateSet = std::pair<std::set<size_t>, bool>;
     public:
         NFA(const Alphabet& alphabet);
-        NFA(const std::vector<State<StatePayload>>& states,
+        NFA(const std::vector<State>& states,
             const std::map<std::pair<size_t, CharType>, size_t>& characterTransitionTable,
             const Alphabet& alphabet);
         NFA(NFA& other) = delete;
@@ -30,20 +30,14 @@ class NFA {
         NFA& operator=(NFA& other) = delete;
         NFA& operator=(NFA&& other) = delete;
 
-        void addState(const State<StatePayload>& state);
-        void addTransition(const State<StatePayload>& from, const CharType& character, const State<StatePayload>& to);
-        void addTransition(const State<StatePayload>& from, /*       Empty         */  const State<StatePayload>& to);
-        void addTransitions(const State<StatePayload>& from, const Alphabet& characters, const State<StatePayload>& to);
+        void addState(const State& state);
+        void addTransition(const State& from, const CharType& character, const State& to);
+        void addTransition(const State& from, /*       Empty         */  const State& to);
+        void addTransitions(const State& from, const Alphabet& characters, const State& to);
 
         std::vector<TokenInfo> find(const std::string& word) const;
 
         void printDebug() const;
-        // TODO: make private
-        std::set<State<StatePayload>> epsilonClosure(const std::set<State<StatePayload>>& states) const;
-        std::set<State<StatePayload>> epsilonClosure(const std::set<size_t>& states) const;
-        std::set<size_t> epsilonClosureIndex(const std::set<State<StatePayload>>& states) const;
-        std::set<size_t> epsilonClosureIndex(const std::set<size_t>& states) const;
-        std::set<size_t> computeStartingState() const;
         NFA toDFA() const;
 
     private:
@@ -51,13 +45,19 @@ class NFA {
 
         std::map<std::pair<size_t, CharType>, size_t> mCharacterTransitionTable;
         std::map<size_t, std::vector<size_t>> mEmptyTransitionTable;
-        std::vector<State<StatePayload>> mStates;
+        std::vector<State> mStates;
 
-        bool exists(const State<StatePayload>& state);
+        bool exists(const State& state);
         std::set<size_t> findReachableStates(const std::set<size_t>& startingState,
                                              const CharType& c) const;
-        std::vector<State<StatePayload>> computeNewStates(const std::vector<MarkedStateSet>& markedStateSetsSet) const;
+        std::vector<State> computeNewStates(const std::vector<MarkedStateSet>& markedStateSetsSet) const;
         static bool isStateMarked(const MarkedState& ms);
+        
+        std::set<State> epsilonClosure(const std::set<State>& states) const;
+        std::set<State> epsilonClosure(const std::set<size_t>& states) const;
+        std::set<size_t> epsilonClosureIndex(const std::set<State>& states) const;
+        std::set<size_t> epsilonClosureIndex(const std::set<size_t>& states) const;
+        std::set<size_t> computeStartingState() const;
 };
 
 #endif
