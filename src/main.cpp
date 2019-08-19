@@ -1,8 +1,7 @@
 #include <iostream>
 #include <chrono>
 
-#include "NFA.hpp"
-#include "Traverser.hpp"
+#include "Lexer.hpp"
 
 int main() {
     Alphabet alphabet{"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.+-"};
@@ -78,35 +77,11 @@ int main() {
     nfa.addTransitions(s17, "0123456789", s18);
     nfa.addTransition(s18, s17);
 
-    NFA dfa = nfa.toDFA();
-    Traverser traverser(dfa);
+    Lexer lexer(nfa.toDFA());
 
-    std::string input = "3e-y";
+    std::string input = "3e-3 test e +4 -2 19e-4";
 
-    State lastValidState;
-    size_t lastRestartCharacterIndex = 0;
-
-    size_t currentIndex = 0;
-    size_t startCharacterIndex = 0;
-
-    std::vector<std::string> tokens;
-
-    while(currentIndex < input.length()) {
-        CharType& c = input.at(currentIndex);
-        auto [found, state] = traverser.next(c);
-        if (found) {
-            if (state.isAccepting) {
-                lastRestartCharacterIndex = currentIndex + 1;
-                lastValidState = state;
-            }
-            currentIndex++;
-        } else {
-            //TODO: what if the string is empty ? If the first transition does not exist ?
-            std::string newToken = std::string(input, startCharacterIndex, lastRestartCharacterIndex - startCharacterIndex);
-            tokens.push_back(newToken);
-            currentIndex = lastRestartCharacterIndex;
-            startCharacterIndex = lastRestartCharacterIndex;
-            traverser.reset();
-        }
+    for (const auto& elt : lexer.extractTokens(input)) {
+        std::cout << elt << std::endl;
     }
 }
