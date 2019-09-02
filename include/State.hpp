@@ -2,19 +2,20 @@
 #define __STATE_HPP__
 
 #include <string>
+#include <vector>
 
-#include "StatePayload.hpp"
+#include "TokenInfo.hpp"
 
 struct State {
     State();
     State(const std::string& name,
-          const StatePayload& payload = StatePayload(),
           bool accepting = false,
-          bool starting = false);
+          bool starting = false,
+          std::vector<TokenInfo> payload = std::vector<TokenInfo>());
     std::string name;
     bool isAccepting;
     bool isStarting;
-    StatePayload payload;
+    std::vector<TokenInfo> payload;
 };
 
 bool operator<(const State& a, const State& b);

@@ -82,7 +82,7 @@ std::vector<TokenInfo> NFA::find(const std::string& word) const {
         nextState = mStates.at(nextIndex);
     }
 
-    return nextState.payload.tokenInfos;
+    return nextState.payload;
 }
 
 void NFA::printDebug() const {
@@ -102,8 +102,8 @@ void NFA::printDebug() const {
         else
             std::cout << " ( )";
         
-        if (!state.payload.tokenInfos.empty()) {
-            for (const TokenInfo& e : state.payload.tokenInfos) {
+        if (!state.payload.empty()) {
+            for (const TokenInfo& e : state.payload) {
                 std::cout << " " << e.type << "(" << e.priority << ")";
             }
         }
@@ -420,12 +420,14 @@ std::vector<State> NFA::computeNewStates(const std::vector<MarkedStateSet>& mark
             std::copy_if(entry.first.begin(), entry.first.end(),
                          std::back_inserter(acceptingStates),
                          [this](const size_t& index) { return mStates.at(index).isAccepting; });
-            std::vector<StatePayload> initialPayloads;
+
+            std::vector<std::vector<TokenInfo>> initialPayloads;
             std::transform(acceptingStates.begin(), acceptingStates.end(),
                            std::back_inserter(initialPayloads),
                            [this](const size_t& index) { return mStates.at(index).payload; });
+
             s.isAccepting = true;
-            s.payload = StatePayload::concatenate(initialPayloads);
+            s.payload = concatenate(initialPayloads);
         }
 
         states.push_back(s);

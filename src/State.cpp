@@ -3,7 +3,7 @@
 State::State() : State("") {
 }
 
-State::State(const std::string& name, const StatePayload& payload, bool accepting, bool starting) :
+State::State(const std::string& name, bool accepting, bool starting, std::vector<TokenInfo> payload) :
     name(name), isAccepting(accepting), isStarting(starting), payload(payload) {
 }
 

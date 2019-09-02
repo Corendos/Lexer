@@ -1,5 +1,6 @@
 #include <iostream>
 #include <chrono>
+#include <vector>
 
 #include "Lexer.hpp"
 
@@ -7,24 +8,45 @@ int main() {
     Alphabet alphabet{"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.+-"};
     NFA nfa{alphabet};
 
-    State s1{"S1", StatePayload(), false, true};
+    TokenInfo ifTokenInfo;
+    ifTokenInfo.priority = 20;
+    ifTokenInfo.type = "IF";
+
+    TokenInfo idTokenInfo;
+    idTokenInfo.priority = 10;
+    idTokenInfo.type = "ID";
+
+    TokenInfo numTokenInfo;
+    numTokenInfo.priority = 10;
+    numTokenInfo.type = "NUM";
+
+    TokenInfo floatTokenInfo;
+    floatTokenInfo.priority = 10;
+    floatTokenInfo.type = "FLOAT";
+
+    std::vector<TokenInfo> ifPayload({ifTokenInfo});
+    std::vector<TokenInfo> idPayload({idTokenInfo});
+    std::vector<TokenInfo> numPayload({numTokenInfo});
+    std::vector<TokenInfo> floatPayload({floatTokenInfo});
+
+    State s1{"S1", false, true};
     State s2{"S2"};
     State s3{"S3"};
-    State s4{"S4", StatePayload{{{"IF", 20}}}, true};
+    State s4{"S4", true, false, ifPayload};
     State s5{"S5"};
-    State s6{"S6", StatePayload{{{"ID", 10}}}, true};
+    State s6{"S6", true, false, idPayload};
     State s7{"S7"};
     State s8{"S8"};
-    State s9{"S9", StatePayload{{{"NUM", 20}}}, true};
+    State s9{"S9", true, false, numPayload};
     State s10{"S10"};
     State s11{"S11"};
-    State s12{"S12", StatePayload{{{"FLOAT", 10}}}, true};
-    State s13{"S13", StatePayload{{{"FLOAT", 10}}}, true};
+    State s12{"S12", true, false, floatPayload};
+    State s13{"S13", true, false, floatPayload};
     State s14{"S14"};
-    State s15{"S15", StatePayload{{{"FLOAT", 10}}}, true};
+    State s15{"S15", true, false, floatPayload};
     State s16{"S16"};
     State s17{"S17"};
-    State s18{"S18", StatePayload{{{"FLOAT", 10}}}, true};
+    State s18{"S18", true, false, floatPayload};
 
     nfa.addState(s1);
     nfa.addState(s2);
@@ -77,11 +99,13 @@ int main() {
     nfa.addTransitions(s17, "0123456789", s18);
     nfa.addTransition(s18, s17);
 
-    Lexer lexer(nfa.toDFA());
+    NFA dfa = nfa.toDFA();
 
-    std::string input = "3e-3 test e +4 -2 19e-4";
+    Lexer lexer(dfa);
+
+    std::string input = "3e-";
 
     for (const auto& elt : lexer.extractTokens(input)) {
-        std::cout << elt << std::endl;
+        std::cout << elt.first << "  " << elt.second << std::endl;
     }
 }

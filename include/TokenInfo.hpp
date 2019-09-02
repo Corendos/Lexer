@@ -2,12 +2,13 @@
 #define __TOKENINFO_HPP__
 
 #include <string>
+#include <vector>
 
 struct TokenInfo {
-    TokenInfo() : TokenInfo("", 0) {}
-    TokenInfo(const std::string& type, int priority) : type(type), priority(priority) {}
     std::string type;
     int priority;
 };
+
+std::vector<TokenInfo> concatenate(const std::vector<std::vector<TokenInfo>>& statePayloads);
 
 #endif

@@ -11,7 +11,7 @@ class Lexer {
     public:
         Lexer(const NFA& nfa);
 
-        std::vector<std::string> extractTokens(const std::string& input);
+        std::vector<std::pair<std::string, std::string>> extractTokens(const std::string& input);
 
     private:
         Traverser mTraverser;
