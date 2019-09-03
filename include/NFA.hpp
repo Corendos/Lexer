@@ -12,7 +12,6 @@
 #include <cassert>
 
 #include "State.hpp"
-#include "StatePayload.hpp"
 
 using Alphabet = std::string;
 using CharType = Alphabet::value_type;
