@@ -35,7 +35,7 @@
             "name": "S6",
             "accepting": true,
             "starting": false,
-            "payload": ["id"]
+            "payload": ["identifier"]
         },
         {
             "name": "S7",
