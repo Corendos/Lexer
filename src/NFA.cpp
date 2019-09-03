@@ -403,8 +403,10 @@ void NFA::fromFile(const std::string& filename) {
     fileStream >> lexicJson;
     fileStream.close();
 
+    // Get the alphabet
     Alphabet alphabet = lexicJson["alphabet"].get<std::string>();
-    std::vector<TokenInfo> tokensInfo(lexicJson["tokensInfo"].size());
+
+    // Get the tokens mapping
     std::map<std::string, TokenInfo> tokensInfoMap;
     std::transform(lexicJson["tokensInfo"].begin(), lexicJson["tokensInfo"].end(),
                    std::inserter(tokensInfoMap, tokensInfoMap.begin()), [](const json& e) {
@@ -415,26 +417,35 @@ void NFA::fromFile(const std::string& filename) {
                    });
     
     for (const auto& entry : tokensInfoMap) {
-        std::cout << entry.first << "\n"
-                  << "\tType: " << entry.second.type << "\n" 
-                  << "\tPriority: " << entry.second.priority << std::endl; 
+        std::cout << "+-" << entry.first << "\n"
+                  << "   +-Type: " << entry.second.type << "\n" 
+                  << "   +-Priority: " << entry.second.priority << std::endl; 
     }
     
-
-    for (const auto& element : lexicJson["states"]) {
-        StateInfo info = {
-            element["name"].get<std::string>(),
-            element["accepting"].get<bool>(),
-            element["starting"].get<bool>(),
-            element["payload"].get<std::vector<std::string>>(),
-        };
-        std::cout << "State " << info.name << "\n"
-                  << "\tAccepting: " << std::boolalpha << info.accepting << std::noboolalpha << "\n"
-                  << "\tStarting: " << std::boolalpha << info.starting << std::noboolalpha << "\n";
-        if (!info.payload.empty()) {
-            std::cout << "\tPayload:";
-            for (const auto& name : info.payload) {
-                std::cout << " " << name;
+    std::vector<State> states(lexicJson["states"].size());
+    std::transform(lexicJson["states"].begin(), lexicJson["states"].end(),
+                   states.begin(), [&tokensInfoMap](const json& data) {
+                       std::vector<TokenInfo> payload;
+                       std::vector<std::string> tokens = data["payload"].get<std::vector<std::string>>();
+                       std::transform(tokens.begin(), tokens.end(),
+                                      std::back_inserter(payload), [&tokensInfoMap](const std::string& name) {
+                                          return tokensInfoMap.at(name);
+                                      });
+                       return State(
+                           data["name"].get<std::string>(),
+                           data["accepting"].get<bool>(),
+                           data["starting"].get<bool>(),
+                           payload
+                       );
+                   });
+    for (const auto& element : states) {
+        std::cout << "+-"<< "State " << element.name << "\n"
+                  << "   +-Accepting: " << std::boolalpha << element.isAccepting << std::noboolalpha << "\n"
+                  << "   +-Starting: " << std::boolalpha << element.isStarting << std::noboolalpha << "\n";
+        if (!element.payload.empty()) {
+            std::cout << "   +- Payload:";
+            for (const auto& info : element.payload) {
+                std::cout << " " << info.type;
             }
             std::cout << std::endl;
         }
