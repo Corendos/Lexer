@@ -1,6 +1,13 @@
 #include "NFA.hpp"
 
 #include <cassert>
+#include <map>
+#include <ios>
+#include <fstream>
+
+#include "json.hpp"
+
+using json = nlohmann::json;
 
 NFA::NFA(const Alphabet& alphabet) : mAlphabet{alphabet} {
 }
@@ -388,6 +395,50 @@ NFA NFA::toDFA() const {
 
     // Return a NFA which is a DFA
     return NFA(states, newCharacterTransitionTable, mAlphabet);
+}
+
+void NFA::fromFile(const std::string& filename) {
+    std::ifstream fileStream(filename);
+    json lexicJson;
+    fileStream >> lexicJson;
+    fileStream.close();
+
+    Alphabet alphabet = lexicJson["alphabet"].get<std::string>();
+    std::vector<TokenInfo> tokensInfo(lexicJson["tokensInfo"].size());
+    std::map<std::string, TokenInfo> tokensInfoMap;
+    std::transform(lexicJson["tokensInfo"].begin(), lexicJson["tokensInfo"].end(),
+                   std::inserter(tokensInfoMap, tokensInfoMap.begin()), [](const json& e) {
+                       TokenInfo info = {e["type"].get<std::string>(), e["priority"].get<int>()};
+                       return std::make_pair(
+                           e["name"].get<std::string>(),
+                           info);
+                   });
+    
+    for (const auto& entry : tokensInfoMap) {
+        std::cout << entry.first << "\n"
+                  << "\tType: " << entry.second.type << "\n" 
+                  << "\tPriority: " << entry.second.priority << std::endl; 
+    }
+    
+
+    for (const auto& element : lexicJson["states"]) {
+        StateInfo info = {
+            element["name"].get<std::string>(),
+            element["accepting"].get<bool>(),
+            element["starting"].get<bool>(),
+            element["payload"].get<std::vector<std::string>>(),
+        };
+        std::cout << "State " << info.name << "\n"
+                  << "\tAccepting: " << std::boolalpha << info.accepting << std::noboolalpha << "\n"
+                  << "\tStarting: " << std::boolalpha << info.starting << std::noboolalpha << "\n";
+        if (!info.payload.empty()) {
+            std::cout << "\tPayload:";
+            for (const auto& name : info.payload) {
+                std::cout << " " << name;
+            }
+            std::cout << std::endl;
+        }
+    }
 }
 
 std::set<size_t> NFA::findReachableStates(const std::set<size_t>& startingState, const CharType& c) const {

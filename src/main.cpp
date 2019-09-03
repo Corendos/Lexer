@@ -5,6 +5,7 @@
 #include "Lexer.hpp"
 
 int main() {
+    NFA::fromFile("../resources/lexic.json");
     Alphabet alphabet{"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.+-"};
     NFA nfa{alphabet};
 
@@ -24,10 +25,20 @@ int main() {
     floatTokenInfo.priority = 10;
     floatTokenInfo.type = "FLOAT";
 
+    TokenInfo plusTokenInfo;
+    plusTokenInfo.priority = 20;
+    plusTokenInfo.type = "+";
+
+    TokenInfo minusTokenInfo;
+    minusTokenInfo.priority = 20;
+    minusTokenInfo.type = "-";
+
     std::vector<TokenInfo> ifPayload({ifTokenInfo});
     std::vector<TokenInfo> idPayload({idTokenInfo});
     std::vector<TokenInfo> numPayload({numTokenInfo});
     std::vector<TokenInfo> floatPayload({floatTokenInfo});
+    std::vector<TokenInfo> plusPayload({plusTokenInfo});
+    std::vector<TokenInfo> minusPayload({minusTokenInfo});
 
     State s1{"S1", false, true};
     State s2{"S2"};
@@ -47,6 +58,9 @@ int main() {
     State s16{"S16"};
     State s17{"S17"};
     State s18{"S18", true, false, floatPayload};
+    State s19{"S19", false, false};
+    State s20{"S20", true, false, plusPayload};
+    State s21{"S21", true, false, minusPayload};
 
     nfa.addState(s1);
     nfa.addState(s2);
@@ -66,6 +80,9 @@ int main() {
     nfa.addState(s16);
     nfa.addState(s17);
     nfa.addState(s18);
+    nfa.addState(s19);
+    nfa.addState(s20);
+    nfa.addState(s21);
 
     nfa.addTransition(s1, s2);
     nfa.addTransition(s2, 'i', s3);
@@ -99,11 +116,15 @@ int main() {
     nfa.addTransitions(s17, "0123456789", s18);
     nfa.addTransition(s18, s17);
 
+    nfa.addTransition(s1, s19);
+    nfa.addTransition(s19, '+', s20);
+    nfa.addTransition(s19, '-', s21);
+
     NFA dfa = nfa.toDFA();
 
     Lexer lexer(dfa);
 
-    std::string input = "3e-";
+    std::string input = "a-3\ntest";
 
     for (const auto& elt : lexer.extractTokens(input)) {
         std::cout << elt.first << "  " << elt.second << std::endl;

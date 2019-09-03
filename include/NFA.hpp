@@ -39,7 +39,16 @@ class NFA {
         void printDebug() const;
         NFA toDFA() const;
 
+        static void fromFile(const std::string& filename);
+
         friend class Traverser;
+
+        struct StateInfo {
+            std::string name;
+            bool accepting;
+            bool starting;
+            std::vector<std::string> payload;
+        };
 
     private:
         Alphabet mAlphabet;

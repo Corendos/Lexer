@@ -1,0 +1,322 @@
+{
+    "alphabet": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.+-",
+    "states": [
+        {
+            "name": "S1",
+            "accepting": false,
+            "starting": false,
+            "payload": []
+        },
+        {
+            "name": "S2",
+            "accepting": false,
+            "starting": false,
+            "payload": []
+        },
+        {
+            "name": "S3",
+            "accepting": false,
+            "starting": false,
+            "payload": []
+        },
+        {
+            "name": "S4",
+            "accepting": true,
+            "starting": false,
+            "payload": ["if"]
+        },
+        {
+            "name": "S5",
+            "accepting": false,
+            "starting": false,
+            "payload": []
+        },
+        {
+            "name": "S6",
+            "accepting": true,
+            "starting": false,
+            "payload": ["id"]
+        },
+        {
+            "name": "S7",
+            "accepting": false,
+            "starting": false,
+            "payload": []
+        },
+        {
+            "name": "S8",
+            "accepting": false,
+            "starting": false,
+            "payload": []
+        },
+        {
+            "name": "S9",
+            "accepting": true,
+            "starting": false,
+            "payload": ["num"]
+        },
+        {
+            "name": "S10",
+            "accepting": false,
+            "starting": false,
+            "payload": []
+        },
+        {
+            "name": "S11",
+            "accepting": false,
+            "starting": false,
+            "payload": []
+        },
+        {
+            "name": "S12",
+            "accepting": true,
+            "starting": false,
+            "payload": ["float"]
+        },
+        {
+            "name": "S13",
+            "accepting": true,
+            "starting": false,
+            "payload": ["float"]
+        },
+        {
+            "name": "S14",
+            "accepting": false,
+            "starting": false,
+            "payload": []
+        },
+        {
+            "name": "S15",
+            "accepting": true,
+            "starting": false,
+            "payload": ["float"]
+        },
+        {
+            "name": "S16",
+            "accepting": false,
+            "starting": false,
+            "payload": []
+        },
+        {
+            "name": "S17",
+            "accepting": false,
+            "starting": false,
+            "payload": []
+        },
+        {
+            "name": "S18",
+            "accepting": true,
+            "starting": false,
+            "payload": ["float"]
+        },
+        {
+            "name": "S19",
+            "accepting": false,
+            "starting": false,
+            "payload": []
+        },
+        {
+            "name": "S20",
+            "accepting": true,
+            "starting": false,
+            "payload": ["plus"]
+        },
+        {
+            "name": "S21",
+            "accepting": true,
+            "starting": false,
+            "payload": ["minus"]
+        }
+    ],
+    "tokensInfo": [
+        {
+            "name": "if",
+            "type": "IF",
+            "priority": 20
+        },
+        {
+            "name": "identifier",
+            "type": "IDENTIFIER",
+            "priority": 10
+        },
+        {
+            "name": "num",
+            "type": "NUM",
+            "priority": 10
+        },
+        {
+            "name": "float",
+            "type": "FLOAT",
+            "priority": 10
+        },
+        {
+            "name": "plus",
+            "type": "+",
+            "priority": 20
+        },
+        {
+            "name": "minus",
+            "type": "-",
+            "priority": 20
+        }
+    ],
+    "transitions": [
+        {
+            "from": "S1",
+            "to": "S2",
+            "characters": ""
+        },
+        {
+            "from": "S2",
+            "to": "S3",
+            "characters": "i"
+        },
+        {
+            "from": "S3",
+            "to": "S4",
+            "characters": "f"
+        },
+        {
+            "from": "S1",
+            "to": "S5",
+            "characters": ""
+        },
+        {
+            "from": "S5",
+            "to": "S6",
+            "characters": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"
+        },
+        {
+            "from": "S6",
+            "to": "S6",
+            "characters": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_0123456789"
+        },
+        {
+            "from": "S1",
+            "to": "S7",
+            "characters": ""
+        },
+        {
+            "from": "S7",
+            "to": "S8",
+            "characters": "+-"
+        },
+        {
+            "from": "S7",
+            "to": "S8",
+            "characters": ""
+        },
+        {
+            "from": "S8",
+            "to": "S9",
+            "characters": "0123456789"
+        },
+        {
+            "from": "S9",
+            "to": "S8",
+            "characters": ""
+        },
+        {
+            "from": "S1",
+            "to": "S10",
+            "characters": ""
+        },
+        {
+            "from": "S10",
+            "to": "S11",
+            "characters": "+-"
+        },
+        {
+            "from": "S10",
+            "to": "S11",
+            "characters": ""
+        },
+        {
+            "from": "S11",
+            "to": "S12",
+            "characters": "0123456789"
+        },
+        {
+            "from": "S12",
+            "to": "S12",
+            "characters": "0123456789"
+        },
+        {
+            "from": "S12",
+            "to": "S13",
+            "characters": "."
+        },
+        {
+            "from": "S13",
+            "to": "S13",
+            "characters": "0123456789"
+        },
+        {
+            "from": "S11",
+            "to": "S14",
+            "characters": "."
+        },
+        {
+            "from": "S15",
+            "to": "S15",
+            "characters": ""
+        },
+        {
+            "from": "S14",
+            "to": "S15",
+            "characters": "0123456789"
+        },
+        {
+            "from": "S15",
+            "to": "S16",
+            "characters": "eE"
+        },
+        {
+            "from": "S12",
+            "to": "S16",
+            "characters": "eE"
+        },
+        {
+            "from": "S13",
+            "to": "S16",
+            "characters": "eE"
+        },
+        {
+            "from": "S16",
+            "to": "S17",
+            "characters": "+-"
+        },
+        {
+            "from": "S16",
+            "to": "S17",
+            "characters": ""
+        },
+        {
+            "from": "S17",
+            "to": "S18",
+            "characters": "0123456789"
+        },
+        {
+            "from": "S18",
+            "to": "S17",
+            "characters": ""
+        },
+
+
+        {
+            "from": "S1",
+            "to": "S2",
+            "characters": ""
+        },
+        {
+            "from": "S1",
+            "to": "S2",
+            "characters": "+"
+        },
+        {
+            "from": "S1",
+            "to": "S2",
+            "characters": "-"
+        }
+    ]
+}
