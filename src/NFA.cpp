@@ -72,6 +72,36 @@ void NFA::addTransitions(const State& from, const Alphabet& characters, const St
     }
 }
 
+void NFA::addTransition(const std::string& from, const CharType& character, const std::string& to) {
+    auto fromIt = std::find_if(mStates.begin(), mStates.end(), [&from](const State& s) { return s.name == from; });
+    auto toIt = std::find_if(mStates.begin(), mStates.end(), [&to](const State& s) { return s.name == to; });
+
+    assert(fromIt != mStates.end());
+    assert(toIt != mStates.end());
+
+    addTransition(*fromIt, character, *toIt);
+}
+
+void NFA::addTransition(const std::string& from, const std::string& to) {
+    auto fromIt = std::find_if(mStates.begin(), mStates.end(), [&from](const State& s) { return s.name == from; });
+    auto toIt = std::find_if(mStates.begin(), mStates.end(), [&to](const State& s) { return s.name == to; });
+
+    assert(fromIt != mStates.end());
+    assert(toIt != mStates.end());
+
+    addTransition(*fromIt, *toIt);
+}
+
+void NFA::addTransitions(const std::string& from, const Alphabet& characters, const std::string& to) {
+    auto fromIt = std::find_if(mStates.begin(), mStates.end(), [&from](const State& s) { return s.name == from; });
+    auto toIt = std::find_if(mStates.begin(), mStates.end(), [&to](const State& s) { return s.name == to; });
+
+    assert(fromIt != mStates.end());
+    assert(toIt != mStates.end());
+
+    addTransitions(*fromIt, characters, *toIt);
+}
+
 std::vector<TokenInfo> NFA::find(const std::string& word) const {
     auto it = std::find_if(mStates.begin(), mStates.end(),
                            [](const State& state) { return state.isStarting; });
@@ -397,7 +427,7 @@ NFA NFA::toDFA() const {
     return NFA(states, newCharacterTransitionTable, mAlphabet);
 }
 
-void NFA::fromFile(const std::string& filename) {
+NFA NFA::fromFile(const std::string& filename) {
     std::ifstream fileStream(filename);
     json lexicJson;
     fileStream >> lexicJson;
@@ -415,41 +445,39 @@ void NFA::fromFile(const std::string& filename) {
                            e["name"].get<std::string>(),
                            info);
                    });
+
+    NFA nfa(alphabet);
     
-    for (const auto& entry : tokensInfoMap) {
-        std::cout << "+-" << entry.first << "\n"
-                  << "   +-Type: " << entry.second.type << "\n" 
-                  << "   +-Priority: " << entry.second.priority << std::endl; 
-    }
-    
-    std::vector<State> states(lexicJson["states"].size());
-    std::transform(lexicJson["states"].begin(), lexicJson["states"].end(),
-                   states.begin(), [&tokensInfoMap](const json& data) {
+    std::for_each(lexicJson["states"].begin(), lexicJson["states"].end(),
+                  [&tokensInfoMap, &nfa](const json& data) {
                        std::vector<TokenInfo> payload;
                        std::vector<std::string> tokens = data["payload"].get<std::vector<std::string>>();
                        std::transform(tokens.begin(), tokens.end(),
                                       std::back_inserter(payload), [&tokensInfoMap](const std::string& name) {
                                           return tokensInfoMap.at(name);
                                       });
-                       return State(
+                       nfa.addState(State(
                            data["name"].get<std::string>(),
                            data["accepting"].get<bool>(),
                            data["starting"].get<bool>(),
-                           payload
-                       );
-                   });
-    for (const auto& element : states) {
-        std::cout << "+-"<< "State " << element.name << "\n"
-                  << "   +-Accepting: " << std::boolalpha << element.isAccepting << std::noboolalpha << "\n"
-                  << "   +-Starting: " << std::boolalpha << element.isStarting << std::noboolalpha << "\n";
-        if (!element.payload.empty()) {
-            std::cout << "   +- Payload:";
-            for (const auto& info : element.payload) {
-                std::cout << " " << info.type;
-            }
-            std::cout << std::endl;
-        }
-    }
+                           payload));
+                  });
+    
+    std::for_each(lexicJson["transitions"].begin(), lexicJson["transitions"].end(),
+                  [&nfa](const json& e) {
+                      std::string characters = e["characters"].get<std::string>();
+                      std::string from = e["from"].get<std::string>();
+                      std::string to = e["to"].get<std::string>();
+                      if (characters.empty()) {
+                          nfa.addTransition(from, to);
+                      } else if (characters.size() == 1) {
+                          nfa.addTransition(from, characters[0], to);
+                      } else {
+                          nfa.addTransitions(from, characters, to);
+                      }
+                  });
+    
+    return nfa;
 }
 
 std::set<size_t> NFA::findReachableStates(const std::set<size_t>& startingState, const CharType& c) const {

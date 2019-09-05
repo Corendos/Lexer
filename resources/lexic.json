@@ -4,7 +4,7 @@
         {
             "name": "S1",
             "accepting": false,
-            "starting": false,
+            "starting": true,
             "payload": []
         },
         {
@@ -310,12 +310,12 @@
         },
         {
             "from": "S1",
-            "to": "S2",
+            "to": "S20",
             "characters": "+"
         },
         {
             "from": "S1",
-            "to": "S2",
+            "to": "S21",
             "characters": "-"
         }
     ]
