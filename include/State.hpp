@@ -6,6 +6,9 @@
 
 #include "TokenInfo.hpp"
 
+/** State Structure
+ * Represent a state in an automata
+ */
 struct State {
     State();
     State(const std::string& name,
@@ -17,10 +20,10 @@ struct State {
     State& operator=(const State& other);
     State& operator=(const State&& other);
 
-    std::string name;
-    bool isAccepting;
-    bool isStarting;
-    std::vector<TokenInfo> payload;
+    std::string name;                   /**< The name of the state */
+    bool isAccepting;                   /**< Is this state accepting */
+    bool isStarting;                    /**< Is this state a starting state */
+    std::vector<TokenInfo> payload;     /**< What type of token is represented by this state */
 };
 
 bool operator<(const State& a, const State& b);
