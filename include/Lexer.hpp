@@ -12,9 +12,17 @@ class Lexer {
         Lexer(const NFA& nfa);
 
         std::vector<std::pair<std::string, std::string>> extractTokens(const std::string& input);
+        std::pair<bool, std::pair<std::string, std::string>> next(const std::string& stream);
 
     private:
         Traverser mTraverser;
+        State mLastValidState;
+        bool mHasLastValidState;
+        bool mStartedToReadToken;
+        size_t mLastStartPosition;
+        size_t mCurrentPosition;
+        size_t mStartPosition;
+        std::string mTempBuffer;
 };
 
 #endif
