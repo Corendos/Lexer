@@ -26,6 +26,14 @@ void NFA::addState(const State& state) {
     mStates.push_back(state);
 }
 
+void NFA::addState(State&& state) {
+    if (exists(state)) {
+        throw std::runtime_error("This states already exists");
+    }
+
+    mStates.push_back(std::move(state));
+}
+
 void NFA::addTransition(const State& from, const CharType& character, const State& to) {
     if (std::find(mAlphabet.begin(), mAlphabet.end(), character) == mAlphabet.end()) {
         throw std::runtime_error("The alphabet must contain the transition character");
@@ -100,26 +108,6 @@ void NFA::addTransitions(const std::string& from, const Alphabet& characters, co
     assert(toIt != mStates.end());
 
     addTransitions(*fromIt, characters, *toIt);
-}
-
-std::vector<TokenInfo> NFA::find(const std::string& word) const {
-    auto it = std::find_if(mStates.begin(), mStates.end(),
-                           [](const State& state) { return state.isStarting; });
-    assert(it != mStates.end());
-
-    size_t nextIndex = std::distance(mStates.begin(), it);
-    State nextState = mStates.at(nextIndex);
-
-    for (const char& c : word) {
-        std::pair<size_t, CharType> key = std::make_pair(nextIndex, c);
-        auto transitionIt = mCharacterTransitionTable.find(key);
-        assert(transitionIt != mCharacterTransitionTable.end());
-
-        nextIndex = transitionIt->second;
-        nextState = mStates.at(nextIndex);
-    }
-
-    return nextState.payload;
 }
 
 void NFA::printDebug() const {
@@ -425,59 +413,6 @@ NFA NFA::toDFA() const {
 
     // Return a NFA which is a DFA
     return NFA(states, newCharacterTransitionTable, mAlphabet);
-}
-
-NFA NFA::fromFile(const std::string& filename) {
-    std::ifstream fileStream(filename);
-    json lexicJson;
-    fileStream >> lexicJson;
-    fileStream.close();
-
-    // Get the alphabet
-    Alphabet alphabet = lexicJson["alphabet"].get<std::string>();
-
-    // Get the tokens mapping
-    std::map<std::string, TokenInfo> tokensInfoMap;
-    std::transform(lexicJson["tokensInfo"].begin(), lexicJson["tokensInfo"].end(),
-                   std::inserter(tokensInfoMap, tokensInfoMap.begin()), [](const json& e) {
-                       TokenInfo info = {e["type"].get<std::string>(), e["priority"].get<int>()};
-                       return std::make_pair(
-                           e["name"].get<std::string>(),
-                           info);
-                   });
-
-    NFA nfa(alphabet);
-    
-    std::for_each(lexicJson["states"].begin(), lexicJson["states"].end(),
-                  [&tokensInfoMap, &nfa](const json& data) {
-                       std::vector<TokenInfo> payload;
-                       std::vector<std::string> tokens = data["payload"].get<std::vector<std::string>>();
-                       std::transform(tokens.begin(), tokens.end(),
-                                      std::back_inserter(payload), [&tokensInfoMap](const std::string& name) {
-                                          return tokensInfoMap.at(name);
-                                      });
-                       nfa.addState(State(
-                           data["name"].get<std::string>(),
-                           data["accepting"].get<bool>(),
-                           data["starting"].get<bool>(),
-                           payload));
-                  });
-    
-    std::for_each(lexicJson["transitions"].begin(), lexicJson["transitions"].end(),
-                  [&nfa](const json& e) {
-                      std::string characters = e["characters"].get<std::string>();
-                      std::string from = e["from"].get<std::string>();
-                      std::string to = e["to"].get<std::string>();
-                      if (characters.empty()) {
-                          nfa.addTransition(from, to);
-                      } else if (characters.size() == 1) {
-                          nfa.addTransition(from, characters[0], to);
-                      } else {
-                          nfa.addTransitions(from, characters, to);
-                      }
-                  });
-    
-    return nfa;
 }
 
 std::set<size_t> NFA::findReachableStates(const std::set<size_t>& startingState, const CharType& c) const {

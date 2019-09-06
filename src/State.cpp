@@ -3,19 +3,19 @@
 State::State() {
 }
 
-State::State(const std::string& name, bool accepting, bool starting, std::vector<TokenInfo> payload) :
+State::State(const std::string& name, bool accepting, bool starting, const std::vector<TokenInfo>& payload) :
     name(name), isAccepting(accepting), isStarting(starting), payload(payload) {
 }
 
-State::State(State& other) :
-    name(other.name), isAccepting(other.isAccepting), isStarting(other.isStarting), payload(payload) {
+State::State(const State& other) :
+    name(other.name), isAccepting(other.isAccepting), isStarting(other.isStarting), payload(other.payload) {
 }
 
-State::State(State&& other) :
-    name(std::move(other.name)), isAccepting(other.isAccepting), isStarting(other.isStarting), payload(std::move(payload)) {
+State::State(const State&& other) :
+    name(std::move(other.name)), isAccepting(other.isAccepting), isStarting(other.isStarting), payload(std::move(other.payload)) {
 }
 
-State& State::operator=(State& other) {
+State& State::operator=(const State& other) {
     this->name = other.name;
     this->isAccepting = other.isAccepting;
     this->isStarting = other.isStarting;
@@ -24,7 +24,7 @@ State& State::operator=(State& other) {
     return *this;
 }
 
-State& State::operator=(State&& other) {
+State& State::operator=(const State&& other) {
     this->name = std::move(other.name);
     this->isAccepting = other.isAccepting;
     this->isStarting = other.isStarting;

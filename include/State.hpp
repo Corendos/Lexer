@@ -11,11 +11,11 @@ struct State {
     State(const std::string& name,
           bool accepting = false,
           bool starting = false,
-          std::vector<TokenInfo> payload = std::vector<TokenInfo>());
-    State(State& other);
-    State(State&& other);
-    State& operator=(State& other);
-    State& operator=(State&& other);
+          const std::vector<TokenInfo>& payload = std::vector<TokenInfo>());
+    State(const State& other);
+    State(const State&& other);
+    State& operator=(const State& other);
+    State& operator=(const State&& other);
 
     std::string name;
     bool isAccepting;

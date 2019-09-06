@@ -30,6 +30,7 @@ class NFA {
         NFA& operator=(NFA&& other) = default;
 
         void addState(const State& state);
+        void addState(State&& state);
         void addTransition(const State& from, const CharType& character, const State& to);
         void addTransition(const State& from, /*       Empty         */  const State& to);
         void addTransitions(const State& from, const Alphabet& characters, const State& to);
@@ -38,21 +39,10 @@ class NFA {
         void addTransition(const std::string& from, /*       Empty         */  const std::string& to);
         void addTransitions(const std::string& from, const Alphabet& characters, const std::string& to);
 
-        std::vector<TokenInfo> find(const std::string& word) const;
-
         void printDebug() const;
         NFA toDFA() const;
 
-        static NFA fromFile(const std::string& filename);
-
         friend class Traverser;
-
-        struct StateInfo {
-            std::string name;
-            bool accepting;
-            bool starting;
-            std::vector<std::string> payload;
-        };
 
     private:
         Alphabet mAlphabet;
