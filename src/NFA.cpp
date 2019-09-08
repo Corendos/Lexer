@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <map>
+#include <set>
 #include <ios>
 #include <fstream>
 
@@ -9,14 +10,23 @@
 
 using json = nlohmann::json;
 
+// Constructor
+
 NFA::NFA(const Alphabet& alphabet) : mAlphabet{alphabet} {
 }
 
-NFA::NFA(const std::vector<State>& states,
+NFA::NFA(const Alphabet& alphabet,
+         const std::vector<State>& states,
          const std::map<std::pair<size_t, CharType>, size_t>& characterTransitionTable,
-         const Alphabet& alphabet) : mCharacterTransitionTable(characterTransitionTable),
-        mStates(states), mAlphabet(alphabet) {
+         const std::map<size_t, std::vector<size_t>>& emptyTransitionTable)
+         : mAlphabet(alphabet),
+           mCharacterTransitionTable(characterTransitionTable),
+           mEmptyTransitionTable(emptyTransitionTable),
+           mStates(states) {
 }
+
+
+// Public methods
 
 void NFA::addState(const State& state) {
     if (exists(state)) {
@@ -412,8 +422,10 @@ NFA NFA::toDFA() const {
     std::vector<State> states = computeNewStates(markedStateSetsSet);
 
     // Return a NFA which is a DFA
-    return NFA(states, newCharacterTransitionTable, mAlphabet);
+    return NFA(mAlphabet, states, newCharacterTransitionTable);
 }
+
+// Private methods
 
 std::set<size_t> NFA::findReachableStates(const std::set<size_t>& startingState, const CharType& c) const {
     std::set<size_t> newTempSet;
@@ -463,4 +475,81 @@ std::vector<State> NFA::computeNewStates(const std::vector<MarkedStateSet>& mark
 
 bool NFA::isStateMarked(const MarkedState& ms) {
     return ms.second;
+}
+
+// Static methods
+
+
+/**
+ * @brief Combine multiple NFA to a single NFA
+ * 
+ * @param nfas  the list of NFA we want to combine
+ * @return      the resulting NFA
+ */
+NFA NFA::combine(const std::vector<NFA>& nfas) {
+    size_t indexOffset = 1;
+
+    std::vector<State> newStates;
+    std::map<std::pair<size_t, CharType>, size_t> characterTransitionTable;
+    std::map<size_t, std::vector<size_t>> emptyTransitionTable;
+
+    std::set<CharType> alphabetSet;
+
+    // We add the first starting state
+    newStates.push_back(State("S0", false, true));
+
+    // We create the empty transitions list for the first created state
+    emptyTransitionTable.insert(std::make_pair(0, std::vector<size_t>()));
+
+    size_t nfaCount = 0;
+
+    // We go through the list of NFA
+    for (const auto& nfa : nfas) {
+        // We update the alphabet
+        for (const auto& c : nfa.mAlphabet) {
+            alphabetSet.insert(c);
+        }
+
+        // We create the new states
+        for (size_t i{0};i < nfa.mStates.size();++i) {
+            const State& state = nfa.mStates.at(i);
+            State newState = state;
+            newState.name = std::to_string(nfaCount) + "-" + state.name;
+
+            if (newState.isStarting) {
+                size_t stateIndex = i  + indexOffset;
+                emptyTransitionTable.at(0).push_back(stateIndex);
+                newState.isStarting = false;
+            }
+
+            newStates.push_back(newState);
+        }
+
+        // We create the list of empty transitions
+        for (const auto& entry : nfa.mEmptyTransitionTable) {
+            size_t newFromIndex = entry.first + indexOffset;
+            std::vector<size_t> to(entry.second.size());
+            std::transform(entry.second.begin(), entry.second.end(),
+                           to.begin(), [&indexOffset](const size_t& index) { return index + indexOffset; });
+            emptyTransitionTable.insert(std::make_pair(newFromIndex, std::move(to)));
+        }
+
+        // We create the list of character transitions
+        for (const auto& entry : nfa.mCharacterTransitionTable) {
+            size_t newFromIndex = entry.first.first + indexOffset;
+            size_t newToIndex = entry.second + indexOffset;
+
+            characterTransitionTable.insert(std::make_pair(std::make_pair(newFromIndex, entry.first.second), newToIndex));
+        }
+
+        // We advance the offset by the number of states in the current NFA
+        indexOffset += nfa.mStates.size();
+        nfaCount++;
+    }
+
+    std::string alphabet;
+    alphabet.reserve(alphabetSet.size());
+    std::copy(alphabetSet.begin(), alphabetSet.end(), alphabet.begin());
+
+    return NFA(alphabet, newStates, characterTransitionTable, emptyTransitionTable);
 }

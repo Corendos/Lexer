@@ -21,12 +21,13 @@ class NFA {
     using MarkedStateSet = std::pair<std::set<size_t>, bool>;
     public:
         NFA(const Alphabet& alphabet);
-        NFA(const std::vector<State>& states,
+        NFA(const Alphabet& alphabet,
+            const std::vector<State>& states,
             const std::map<std::pair<size_t, CharType>, size_t>& characterTransitionTable,
-            const Alphabet& alphabet);
-        NFA(NFA& other) = default;
+            const std::map<size_t, std::vector<size_t>>& emptyTransitionTable = std::map<size_t, std::vector<size_t>>());
+        NFA(const NFA& other) = default;
         NFA(NFA&& other) = default;
-        NFA& operator=(NFA& other) = default;
+        NFA& operator=(const NFA& other) = default;
         NFA& operator=(NFA&& other) = default;
 
         void addState(const State& state);
@@ -41,6 +42,8 @@ class NFA {
 
         void printDebug() const;
         NFA toDFA() const;
+
+        static NFA combine(const std::vector<NFA>& nfas);
 
         friend class Traverser;
 
