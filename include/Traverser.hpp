@@ -9,10 +9,13 @@ class Traverser {
 
         void reset();
         std::pair<bool, State> next(const CharType& character);
+
+        bool isReset() const;
     
     private:
         const NFA& mNFA;
         size_t mCurrentStateIndex;
+        bool mReset;
 };
 
 #endif

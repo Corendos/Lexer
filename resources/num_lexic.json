@@ -1,0 +1,36 @@
+{
+    "alphabet": "0123456789",
+    "states": [
+        {
+            "name": "S0",
+            "accepting": false,
+            "starting": true,
+            "payload": []
+        },
+        {
+            "name": "S1",
+            "accepting": true,
+            "starting": false,
+            "payload": ["num"]
+        }
+    ],
+    "tokensInfo": [
+        {
+            "name": "num",
+            "type": "NUM",
+            "priority": 10
+        }
+    ],
+    "transitions": [
+        {
+            "from": "S0",
+            "to": "S1",
+            "characters": "123456789"
+        },
+        {
+            "from": "S1",
+            "to": "S1",
+            "characters": "0123456789"
+        }
+    ]
+}

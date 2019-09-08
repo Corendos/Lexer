@@ -1,0 +1,30 @@
+{
+    "alphabet": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.+-",
+    "states": [
+        {
+            "name": "S0",
+            "accepting": false,
+            "starting": true,
+            "payload": []
+        },
+        {
+            "name": "S1",
+            "accepting": true,
+            "starting": false,
+            "payload": []
+        }
+    ],
+    "tokensInfo": [],
+    "transitions": [
+        {
+            "from": "S0",
+            "to": "S1",
+            "characters": "c"
+        },
+        {
+            "from": "S1",
+            "to": "S1",
+            "characters": "c"
+        }
+    ]
+}

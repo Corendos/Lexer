@@ -13,6 +13,7 @@ void Traverser::reset() {
     assert(it != mNFA.mStates.end());
 
     mCurrentStateIndex = std::distance(mNFA.mStates.begin(), it);
+    mReset = true;
 }
 
 std::pair<bool, State> Traverser::next(const CharType& character) {
@@ -21,6 +22,11 @@ std::pair<bool, State> Traverser::next(const CharType& character) {
         return std::make_pair(false, State());
     } else {
         mCurrentStateIndex = it->second;
+        mReset = false;
         return std::make_pair(true, mNFA.mStates.at(it->second));
     }
+}
+
+bool Traverser::isReset() const {
+    return mReset;
 }

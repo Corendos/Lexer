@@ -1,0 +1,121 @@
+{
+    "alphabet": "0123456789.eE-+",
+    "states": [
+        {
+            "name": "S0",
+            "accepting": false,
+            "starting": true,
+            "payload": []
+        },
+        {
+            "name": "S1",
+            "accepting": false,
+            "starting": false,
+            "payload": []
+        },
+        {
+            "name": "S2",
+            "accepting": true,
+            "starting": false,
+            "payload": ["float"]
+        },
+        {
+            "name": "S3",
+            "accepting": true,
+            "starting": false,
+            "payload": ["float"]
+        },
+        {
+            "name": "S4",
+            "accepting": false,
+            "starting": false,
+            "payload": []
+        },
+        {
+            "name": "S5",
+            "accepting": true,
+            "starting": false,
+            "payload": ["float"]
+        },
+        {
+            "name": "S6",
+            "accepting": false,
+            "starting": false,
+            "payload": []
+        }
+    ],
+    "tokensInfo": [
+        {
+            "name": "float",
+            "type": "FLOAT",
+            "priority": 10
+        }
+    ],
+    "transitions": [
+        {
+            "from": "S0",
+            "to": "S1",
+            "characters": "0123456789"
+        },
+        {
+            "from": "S0",
+            "to": "S2",
+            "characters": "."
+        },
+        {
+            "from": "S1",
+            "to": "S2",
+            "characters": "."
+        },
+        {
+            "from": "S1",
+            "to": "S1",
+            "characters": "0123456789"
+        },
+        {
+            "from": "S2",
+            "to": "S3",
+            "characters": "0123456789"
+        },
+        {
+            "from": "S2",
+            "to": "S4",
+            "characters": "eE"
+        },
+        {
+            "from": "S1",
+            "to": "S4",
+            "characters": "eE"
+        },
+        {
+            "from": "S3",
+            "to": "S3",
+            "characters": "0123456789"
+        },
+        {
+            "from": "S3",
+            "to": "S4",
+            "characters": "eE"
+        },
+        {
+            "from": "S4",
+            "to": "S5",
+            "characters": "0123456789"
+        },
+        {
+            "from": "S4",
+            "to": "S6",
+            "characters": "+-"
+        },
+        {
+            "from": "S5",
+            "to": "S5",
+            "characters": "0123456789"
+        },
+        {
+            "from": "S6",
+            "to": "S5",
+            "characters": "0123456789"
+        }
+    ]
+}
