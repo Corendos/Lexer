@@ -548,8 +548,7 @@ NFA NFA::combine(const std::vector<NFA>& nfas) {
     }
 
     std::string alphabet;
-    alphabet.reserve(alphabetSet.size());
-    std::copy(alphabetSet.begin(), alphabetSet.end(), alphabet.begin());
+    std::copy(alphabetSet.begin(), alphabetSet.end(), std::back_inserter(alphabet));
 
     return NFA(alphabet, newStates, characterTransitionTable, emptyTransitionTable);
 }
