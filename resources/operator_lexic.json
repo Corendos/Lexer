@@ -1,0 +1,191 @@
+{
+    "alphabet": "+-*/%(){}[]",
+    "states": [
+        {
+            "name": "S0",
+            "accepting": false,
+            "starting": true,
+            "payload": []
+        },
+        {
+            "name": "S1",
+            "accepting": true,
+            "starting": false,
+            "payload": ["plus"]
+        },
+        {
+            "name": "S2",
+            "accepting": true,
+            "starting": false,
+            "payload": ["minus"]
+        },
+        {
+            "name": "S3",
+            "accepting": true,
+            "starting": false,
+            "payload": ["star"]
+        },
+        {
+            "name": "S4",
+            "accepting": true,
+            "starting": false,
+            "payload": ["division"]
+        },
+        {
+            "name": "S5",
+            "accepting": true,
+            "starting": false,
+            "payload": ["modulo"]
+        },
+        {
+            "name": "S6",
+            "accepting": true,
+            "starting": false,
+            "payload": ["opening_parenthesis"]
+        },
+        {
+            "name": "S7",
+            "accepting": true,
+            "starting": false,
+            "payload": ["closing_parenthesis"]
+        },
+        {
+            "name": "S8",
+            "accepting": true,
+            "starting": false,
+            "payload": ["opening_bracket"]
+        },
+        {
+            "name": "S9",
+            "accepting": true,
+            "starting": false,
+            "payload": ["closing_bracket"]
+        },
+        {
+            "name": "S10",
+            "accepting": true,
+            "starting": false,
+            "payload": ["opening_square_bracket"]
+        },
+        {
+            "name": "S11",
+            "accepting": true,
+            "starting": false,
+            "payload": ["closing_square_bracket"]
+        }
+    ],
+    "tokensInfo": [
+        {
+            "name": "plus",
+            "type": "PLUS",
+            "priority": 10
+        },
+        {
+            "name": "minus",
+            "type": "MINUS",
+            "priority": 10
+        },
+        {
+            "name": "star",
+            "type": "STAR",
+            "priority": 10
+        },
+        {
+            "name": "division",
+            "type": "DIVISION",
+            "priority": 10
+        },
+        {
+            "name": "modulo",
+            "type": "MODULO",
+            "priority": 10
+        },
+        {
+            "name": "opening_parenthesis",
+            "type": "OPENING_PARENTHESIS",
+            "priority": 10
+        },
+        {
+            "name": "closing_parenthesis",
+            "type": "CLOSING_PARENTHESIS",
+            "priority": 10
+        },
+        {
+            "name": "opening_bracket",
+            "type": "OPENING_BRACKET",
+            "priority": 10
+        },
+        {
+            "name": "closing_bracket",
+            "type": "CLOSING_BRACKET",
+            "priority": 10
+        },
+        {
+            "name": "opening_square_bracket",
+            "type": "OPENING_SQUARE_BRACKET",
+            "priority": 10
+        },
+        {
+            "name": "closing_square_bracket",
+            "type": "CLOSING_SQUARE_BRACKET",
+            "priority": 10
+        }
+    ],
+    "transitions": [
+        {
+            "from": "S0",
+            "to": "S1",
+            "characters": "+"
+        },
+        {
+            "from": "S0",
+            "to": "S2",
+            "characters": "-"
+        },
+        {
+            "from": "S0",
+            "to": "S3",
+            "characters": "*"
+        },
+        {
+            "from": "S0",
+            "to": "S4",
+            "characters": "/"
+        },
+        {
+            "from": "S0",
+            "to": "S5",
+            "characters": "%"
+        },
+        {
+            "from": "S0",
+            "to": "S6",
+            "characters": "("
+        },
+        {
+            "from": "S0",
+            "to": "S7",
+            "characters": ")"
+        },
+        {
+            "from": "S0",
+            "to": "S8",
+            "characters": "{"
+        },
+        {
+            "from": "S0",
+            "to": "S9",
+            "characters": "}"
+        },
+        {
+            "from": "S0",
+            "to": "S10",
+            "characters": "["
+        },
+        {
+            "from": "S0",
+            "to": "S11",
+            "characters": "]"
+        }
+    ]
+}

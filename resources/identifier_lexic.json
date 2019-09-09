@@ -1,5 +1,5 @@
 {
-    "alphabet": "0123456789",
+    "alphabet": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_",
     "states": [
         {
             "name": "S0",
@@ -11,13 +11,13 @@
             "name": "S1",
             "accepting": true,
             "starting": false,
-            "payload": ["num"]
+            "payload": ["identifier"]
         }
     ],
     "tokensInfo": [
         {
-            "name": "num",
-            "type": "NUM",
+            "name": "identifier",
+            "type": "IDENTIFIER",
             "priority": 10
         }
     ],
@@ -25,12 +25,12 @@
         {
             "from": "S0",
             "to": "S1",
-            "characters": "0123456789"
+            "characters": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"
         },
         {
             "from": "S1",
             "to": "S1",
-            "characters": "0123456789"
+            "characters": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"
         }
     ]
 }

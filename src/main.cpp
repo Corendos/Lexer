@@ -10,42 +10,25 @@
 
 
 int main() {
-    NFA floatNFA = NFALoader::fromFilename("../resources/num_lexic.json");
+    std::vector<NFA> nfas = {
+        NFALoader::fromFilename("../resources/identifier_lexic.json"),
+        NFALoader::fromFilename("../resources/operator_lexic.json"),
+        NFALoader::fromFilename("../resources/num_lexic.json"),
+        NFALoader::fromFilename("../resources/float_lexic.json")
+    };
 
+    NFA combined = NFA::combine(nfas);
 
-    NFA floatDFA = floatNFA.toDFA();
-    floatDFA.printDebug();
+    NFA dfa = combined.toDFA();
 
-    Lexer lexer(floatDFA);
-
-    for (const auto& elt : lexer.extractTokens("1 1 10  \n\t")) {
-        std::cout << elt.first << "  " << elt.second << "\n";
-    }
-
-    return 0;
-
-
-    /*NFA nfa = NFALoader::fromFilename("../resources/lexic.json");
-
-    NFA dfa = nfa.toDFA();
+    dfa.printDebug();
 
     Lexer lexer(dfa);
 
-    std::ifstream fileStream("../resources/main.code");
-    std::string stream(std::istreambuf_iterator<char>(fileStream), {});
-
-    bool c = false;
-    std::pair<std::string, std::string> token;
-
-    /*for (const auto& elt : lexer.extractTokens(stream)) {
-        continue;
+    std::string input = "1 + 2 * (3 * (2 - 4))";
+    for (const auto& elt : lexer.extractTokens(input)) {
+        std::cout << elt.first << "  " << elt.second << std::endl;
     }
 
     return 0;
-
-    std::tie(c, token) = lexer.next(stream);
-    while (c) {
-        //output << token.first << "  " << token.second << "\n";
-        std::tie(c, token) = lexer.next(stream);
-    }*/
 }
