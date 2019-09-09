@@ -23,6 +23,8 @@ class Lexer {
         size_t mCurrentPosition;
         size_t mStartPosition;
         std::string mTempBuffer;
+
+        std::pair<std::string, std::string> getLastToken(const std::string& input);
 };
 
 #endif

@@ -31,60 +31,21 @@ std::vector<std::pair<std::string, std::string>> Lexer::extractTokens(const std:
             // to the list of tokens (if it exists)
             if (mCurrentPosition == input.length()) {
                 assert(mHasLastValidState);
-                std::string newToken(input, mStartPosition, mLastStartPosition - mStartPosition);
-                std::string tokenType;
-                size_t priority{0};
-                for (const auto& e : mLastValidState.payload) {
-                    if (e.priority > priority) {
-                        priority = e.priority;
-                        tokenType = e.type;
-                    }
-                }
-                tokens.push_back(std::make_pair(newToken, tokenType));
-                mCurrentPosition = mLastStartPosition;
-                mStartPosition = mLastStartPosition;
-                mHasLastValidState = false;
-                mTraverser.reset();
+
+                tokens.push_back(getLastToken(input));
             }
         } else {
+            // TODO: better handling of these case
             if (c == ' ' || c == '\n') {
                 if (mHasLastValidState) {
-                    //TODO: what if the string is empty ? If the first transition does not exist ?
-                    std::string newToken(input, mStartPosition, mLastStartPosition - mStartPosition);
-                    std::string tokenType;
-                    size_t priority{0};
-                    for (const auto& e : mLastValidState.payload) {
-                        if (e.priority > priority) {
-                            priority = e.priority;
-                            tokenType = e.type;
-                        }
-                    }
-                    tokens.push_back(std::make_pair(newToken, tokenType));
-                    mCurrentPosition = mLastStartPosition;
-                    mStartPosition = mLastStartPosition;
-                    mHasLastValidState = false;
-                    mTraverser.reset();
+                    tokens.push_back(getLastToken(input));
                 } else {
                     mCurrentPosition++;
                     mStartPosition++;
                 }
             } else {
                 assert(mHasLastValidState);
-                //TODO: what if the string is empty ? If the first transition does not exist ?
-                std::string newToken(input, mStartPosition, mLastStartPosition - mStartPosition);
-                std::string tokenType;
-                size_t priority{0};
-                for (const auto& e : mLastValidState.payload) {
-                    if (e.priority > priority) {
-                        priority = e.priority;
-                        tokenType = e.type;
-                    }
-                }
-                tokens.push_back(std::make_pair(newToken, tokenType));
-                mCurrentPosition = mLastStartPosition;
-                mStartPosition = mLastStartPosition;
-                mHasLastValidState = false;
-                mTraverser.reset();
+                tokens.push_back(getLastToken(input));
             }
         }
     }
@@ -103,22 +64,7 @@ std::pair<bool, std::pair<std::string, std::string>> Lexer::next(const std::stri
                 return std::make_pair(false, std::make_pair("", ""));
             }
 
-            //TODO: what if the string is empty ? If the first transition does not exist ?
-            std::string newToken = mTempBuffer.substr(0, mLastStartPosition - mStartPosition);
-            std::string tokenType;
-            size_t priority{0};
-            for (const auto& e : mLastValidState.payload) {
-                if (e.priority > priority) {
-                    priority = e.priority;
-                    tokenType = e.type;
-                }
-            }
-            returnedValue = std::make_pair(newToken, tokenType);
-            mCurrentPosition = mLastStartPosition;
-            mStartPosition = mLastStartPosition;
-            mHasLastValidState = false;
-            mStartedToReadToken = false;
-            mTraverser.reset();
+            returnedValue = getLastToken(stream);
             mTempBuffer.clear();
             stateFound = true;
             continue;
@@ -131,8 +77,6 @@ std::pair<bool, std::pair<std::string, std::string>> Lexer::next(const std::stri
         auto [found, state] = mTraverser.next(c);
 
         if (found) {
-            mStartedToReadToken = true;
-
             if (state.isAccepting) {
                 mLastStartPosition = mCurrentPosition + 1;
                 mLastValidState = state;
@@ -141,34 +85,44 @@ std::pair<bool, std::pair<std::string, std::string>> Lexer::next(const std::stri
 
             mCurrentPosition++;
         } else {
-            if (mStartedToReadToken) {
+            // TODO: better handling of these case
+            if (c == ' ' || c == '\n') {
+                if (mHasLastValidState) {
+                    returnedValue = getLastToken(stream);
+                    mTempBuffer.clear();
+                    stateFound = true;
+                } else {
+                    mTempBuffer.clear();
+                    mCurrentPosition++;
+                    mStartPosition++;
+                }
+            } else {
                 assert(mHasLastValidState);
 
-                //TODO: what if the string is empty ? If the first transition does not exist ?
-                std::string newToken = mTempBuffer.substr(0, mLastStartPosition - mStartPosition);
-                std::string tokenType;
-                size_t priority{0};
-                for (const auto& e : mLastValidState.payload) {
-                    if (e.priority > priority) {
-                        priority = e.priority;
-                        tokenType = e.type;
-                    }
-                }
-                returnedValue = std::make_pair(newToken, tokenType);
-                mCurrentPosition = mLastStartPosition;
-                mStartPosition = mLastStartPosition;
-                mHasLastValidState = false;
-                mStartedToReadToken = false;
-                mTraverser.reset();
+                returnedValue = getLastToken(stream);
                 mTempBuffer.clear();
                 stateFound = true;
-            } else {
-                mTempBuffer.clear();
-                mCurrentPosition++;
-                mStartPosition++;
             }
         }
     } while(!stateFound);
 
     return std::make_pair(true, returnedValue);
 }//*/
+
+std::pair<std::string, std::string> Lexer::getLastToken(const std::string& input) {
+    std::string newToken(input, mStartPosition, mLastStartPosition - mStartPosition);
+    std::string tokenType;
+    size_t priority{0};
+    for (const auto& e : mLastValidState.payload) {
+        if (e.priority > priority) {
+            priority = e.priority;
+            tokenType = e.type;
+        }
+    }
+    mCurrentPosition = mLastStartPosition;
+    mStartPosition = mLastStartPosition;
+    mHasLastValidState = false;
+    mTraverser.reset();
+
+    return std::make_pair(newToken, tokenType);
+}
