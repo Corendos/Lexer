@@ -65,6 +65,8 @@ class NFA {
         std::set<size_t> epsilonClosureIndex(const std::set<State>& states) const;
         std::set<size_t> epsilonClosureIndex(const std::set<size_t>& states) const;
         std::set<size_t> computeStartingState() const;
+    
+    friend class NFAIO;
 };
 
 #endif

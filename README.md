@@ -6,7 +6,9 @@ This is a repository containing my implementation of a lexer, based on the follo
 
 ## Todo
 [x] NFA to DFA transformation  
-[~] Detecting tokens  
+[x] Detecting tokens
+[x] File loading  
+[~] File saving  
 [ ] Write documentation
 [ ] Report lexical errors instead of terminating the program  
 [ ] Use a better structure to represent token types  
