@@ -1,11 +1,11 @@
-#include "NFALoader.hpp"
+#include "NFAIO.hpp"
 
 #include <fstream>
 #include "json.hpp"
 
 using json = nlohmann::json;
 
-NFA NFALoader::fromFilename(const std::string& filename) {
+NFA NFAIO::loadFromFilename(const std::string& filename) {
     std::ifstream fileStream(filename);
     json lexicJson;
     fileStream >> lexicJson;
