@@ -17,13 +17,13 @@
             "name": "S2",
             "accepting": true,
             "starting": false,
-            "payload": ["float"]
+            "payload": ["FLOAT"]
         },
         {
             "name": "S3",
             "accepting": true,
             "starting": false,
-            "payload": ["float"]
+            "payload": ["FLOAT"]
         },
         {
             "name": "S4",
@@ -35,7 +35,7 @@
             "name": "S5",
             "accepting": true,
             "starting": false,
-            "payload": ["float"]
+            "payload": ["FLOAT"]
         },
         {
             "name": "S6",
@@ -46,7 +46,6 @@
     ],
     "tokensInfo": [
         {
-            "name": "float",
             "type": "FLOAT",
             "priority": 10
         }

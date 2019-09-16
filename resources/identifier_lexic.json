@@ -11,12 +11,11 @@
             "name": "S1",
             "accepting": true,
             "starting": false,
-            "payload": ["identifier"]
+            "payload": ["IDENTIFIER"]
         }
     ],
     "tokensInfo": [
         {
-            "name": "identifier",
             "type": "IDENTIFIER",
             "priority": 10
         }

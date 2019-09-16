@@ -11,122 +11,111 @@
             "name": "S1",
             "accepting": true,
             "starting": false,
-            "payload": ["plus"]
+            "payload": ["PLUS"]
         },
         {
             "name": "S2",
             "accepting": true,
             "starting": false,
-            "payload": ["minus"]
+            "payload": ["MINUS"]
         },
         {
             "name": "S3",
             "accepting": true,
             "starting": false,
-            "payload": ["star"]
+            "payload": ["STAR"]
         },
         {
             "name": "S4",
             "accepting": true,
             "starting": false,
-            "payload": ["division"]
+            "payload": ["DIVISION"]
         },
         {
             "name": "S5",
             "accepting": true,
             "starting": false,
-            "payload": ["modulo"]
+            "payload": ["MODULO"]
         },
         {
             "name": "S6",
             "accepting": true,
             "starting": false,
-            "payload": ["opening_parenthesis"]
+            "payload": ["OPENING_PARENTHESIS"]
         },
         {
             "name": "S7",
             "accepting": true,
             "starting": false,
-            "payload": ["closing_parenthesis"]
+            "payload": ["CLOSING_PARENTHESIS"]
         },
         {
             "name": "S8",
             "accepting": true,
             "starting": false,
-            "payload": ["opening_bracket"]
+            "payload": ["OPENING_BRACKET"]
         },
         {
             "name": "S9",
             "accepting": true,
             "starting": false,
-            "payload": ["closing_bracket"]
+            "payload": ["CLOSING_BRACKET"]
         },
         {
             "name": "S10",
             "accepting": true,
             "starting": false,
-            "payload": ["opening_square_bracket"]
+            "payload": ["OPENING_SQUARE_BRACKET"]
         },
         {
             "name": "S11",
             "accepting": true,
             "starting": false,
-            "payload": ["closing_square_bracket"]
+            "payload": ["CLOSING_SQUARE_BRACKET"]
         }
     ],
     "tokensInfo": [
         {
-            "name": "plus",
             "type": "PLUS",
             "priority": 10
         },
         {
-            "name": "minus",
             "type": "MINUS",
             "priority": 10
         },
         {
-            "name": "star",
             "type": "STAR",
             "priority": 10
         },
         {
-            "name": "division",
             "type": "DIVISION",
             "priority": 10
         },
         {
-            "name": "modulo",
             "type": "MODULO",
             "priority": 10
         },
         {
-            "name": "opening_parenthesis",
             "type": "OPENING_PARENTHESIS",
             "priority": 10
         },
         {
-            "name": "closing_parenthesis",
             "type": "CLOSING_PARENTHESIS",
             "priority": 10
         },
         {
-            "name": "opening_bracket",
             "type": "OPENING_BRACKET",
             "priority": 10
         },
         {
-            "name": "closing_bracket",
             "type": "CLOSING_BRACKET",
             "priority": 10
         },
         {
-            "name": "opening_square_bracket",
             "type": "OPENING_SQUARE_BRACKET",
             "priority": 10
         },
         {
-            "name": "closing_square_bracket",
             "type": "CLOSING_SQUARE_BRACKET",
             "priority": 10
         }

@@ -20,7 +20,7 @@ NFA NFAIO::loadFromFilename(const std::string& filename) {
     std::transform(lexicJson["tokensInfo"].begin(), lexicJson["tokensInfo"].end(),
                    std::inserter(tokensInfoMap, tokensInfoMap.begin()), [](const json& e) {
                        return std::make_pair(
-                           e["name"].get<std::string>(),
+                           e["type"].get<std::string>(),
                            TokenInfo{e["type"].get<std::string>(), e["priority"].get<int>()});
                    });
 

@@ -23,7 +23,7 @@
             "name": "S4",
             "accepting": true,
             "starting": false,
-            "payload": ["if"]
+            "payload": ["IF"]
         },
         {
             "name": "S5",
@@ -35,7 +35,7 @@
             "name": "S6",
             "accepting": true,
             "starting": false,
-            "payload": ["identifier"]
+            "payload": ["IDENTIFIER"]
         },
         {
             "name": "S7",
@@ -53,7 +53,7 @@
             "name": "S9",
             "accepting": true,
             "starting": false,
-            "payload": ["num"]
+            "payload": ["NUM"]
         },
         {
             "name": "S10",
@@ -71,13 +71,13 @@
             "name": "S12",
             "accepting": true,
             "starting": false,
-            "payload": ["float"]
+            "payload": ["FLOAT"]
         },
         {
             "name": "S13",
             "accepting": true,
             "starting": false,
-            "payload": ["float"]
+            "payload": ["FLOAT"]
         },
         {
             "name": "S14",
@@ -89,7 +89,7 @@
             "name": "S15",
             "accepting": true,
             "starting": false,
-            "payload": ["float"]
+            "payload": ["FLOAT"]
         },
         {
             "name": "S16",
@@ -107,7 +107,7 @@
             "name": "S18",
             "accepting": true,
             "starting": false,
-            "payload": ["float"]
+            "payload": ["FLOAT"]
         },
         {
             "name": "S19",
@@ -119,43 +119,37 @@
             "name": "S20",
             "accepting": true,
             "starting": false,
-            "payload": ["plus"]
+            "payload": ["+"]
         },
         {
             "name": "S21",
             "accepting": true,
             "starting": false,
-            "payload": ["minus"]
+            "payload": ["-"]
         }
     ],
     "tokensInfo": [
         {
-            "name": "if",
             "type": "IF",
             "priority": 20
         },
         {
-            "name": "identifier",
             "type": "IDENTIFIER",
             "priority": 10
         },
         {
-            "name": "num",
             "type": "NUM",
             "priority": 10
         },
         {
-            "name": "float",
             "type": "FLOAT",
             "priority": 10
         },
         {
-            "name": "plus",
             "type": "+",
             "priority": 20
         },
         {
-            "name": "minus",
             "type": "-",
             "priority": 20
         }

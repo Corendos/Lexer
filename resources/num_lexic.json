@@ -11,12 +11,11 @@
             "name": "S1",
             "accepting": true,
             "starting": false,
-            "payload": ["num"]
+            "payload": ["NUM"]
         }
     ],
     "tokensInfo": [
         {
-            "name": "num",
             "type": "NUM",
             "priority": 10
         }
