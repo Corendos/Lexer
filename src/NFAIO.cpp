@@ -90,6 +90,7 @@ bool NFAIO::saveToFile(const NFA& nfa, const std::string& filename) {
         statesNameMapping.insert(std::make_pair(i, nfa.mStates.at(i).name));
     }
 
+    // Create the transitions (non empty)
     std::map<std::pair<size_t, size_t>, std::string> transitions;
     std::for_each(nfa.mCharacterTransitionTable.begin(), nfa.mCharacterTransitionTable.end(),
                   [&transitions](const std::pair<std::pair<size_t, CharType>, size_t>& entry) {
@@ -102,6 +103,7 @@ bool NFAIO::saveToFile(const NFA& nfa, const std::string& filename) {
                       it->second.push_back(entry.first.second);
                   });
 
+    // Create the empty transitions
     std::vector<std::pair<size_t, size_t>> emptyTransitions;
     std::for_each(nfa.mEmptyTransitionTable.begin(), nfa.mEmptyTransitionTable.end(),
                   [&emptyTransitions](const std::pair<size_t, std::vector<size_t>>& entry) {
@@ -110,6 +112,8 @@ bool NFAIO::saveToFile(const NFA& nfa, const std::string& filename) {
                                         emptyTransitions.push_back(std::make_pair(entry.first, to));
                                     });
                   });
+    
+    // Combine them in a single array
     std::vector<json> jsonTransitions(transitions.size() + emptyTransitions.size());
     std::transform(transitions.begin(), transitions.end(),
                    jsonTransitions.begin(), 
@@ -132,6 +136,25 @@ bool NFAIO::saveToFile(const NFA& nfa, const std::string& filename) {
                    });
     
     output["transitions"] = jsonTransitions;
+
+    // Create the list of tokens infos
+    std::vector<json> tokensInfo;
+    std::set<std::string> tokensNames;
+    std::for_each(nfa.mStates.begin(), nfa.mStates.end(),
+                  [&tokensInfo, &tokensNames](const State& state) {
+                      std::for_each(state.payload.begin(), state.payload.end(),
+                                    [&tokensInfo, &tokensNames](const TokenInfo& tokenInfo) {
+                                        if (tokensNames.find(tokenInfo.type) == tokensNames.end()) {
+                                            tokensNames.insert(tokenInfo.type);
+                                            json jsonTokenInfo;
+                                            jsonTokenInfo["type"] = tokenInfo.type;
+                                            jsonTokenInfo["priority"] = tokenInfo.priority;
+                                            tokensInfo.push_back(std::move(jsonTokenInfo));
+                                        }
+                                    });
+                  });
+    
+    output["tokensInfo"] = tokensInfo;
 
     std::ofstream outputStream(filename);
     outputStream << std::setw(4) << output;
