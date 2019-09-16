@@ -1,4 +1,5 @@
 #include "Lexer.hpp"
+#include "LexicalErrorException.hpp"
 
 Lexer::Lexer(const NFA& nfa) :
     mTraverser(nfa), mHasLastValidState(false),
@@ -30,7 +31,10 @@ std::vector<std::pair<std::string, std::string>> Lexer::extractTokens(const std:
             // If we reached the end of the input, we need to add the last valid token
             // to the list of tokens (if it exists)
             if (mCurrentPosition == input.length()) {
-                assert(mHasLastValidState);
+                if (!mHasLastValidState) {
+                    std::string unknownToken(input, mStartPosition, mLastStartPosition - mStartPosition);
+                    throw LexicalErrorException("\"" + unknownToken + "\" is not a valid token.");
+                }
 
                 tokens.push_back(getLastToken(input));
             }
@@ -44,7 +48,10 @@ std::vector<std::pair<std::string, std::string>> Lexer::extractTokens(const std:
                     mStartPosition++;
                 }
             } else {
-                assert(mHasLastValidState);
+                if (!mHasLastValidState) {
+                    std::string unknownToken(input, mStartPosition, mLastStartPosition - mStartPosition);
+                    throw LexicalErrorException("\"" + unknownToken + "\" is not a valid token.");
+                }
                 tokens.push_back(getLastToken(input));
             }
         }
