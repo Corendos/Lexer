@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['payload',['payload',['../structState.html#a19ea4225f19a3281e2d6c890b0c09312',1,'State']]]
+  ['name',['name',['../structState.html#ad57f19fd0a86f129840d8739253d2c72',1,'State']]],
+  ['next',['next',['../classLexer.html#afd24d0694acffafff7f705cefe2ece21',1,'Lexer']]],
+  ['nfa',['NFA',['../classNFA.html',1,'NFA'],['../classNFA.html#ae8841f4b0dbe122187e2a64c73643769',1,'NFA::NFA(const Alphabet &amp;alphabet)'],['../classNFA.html#ae7fe25f259e31506f1358608f44b3d24',1,'NFA::NFA(const Alphabet &amp;alphabet, const std::vector&lt; State &gt; &amp;states, const std::map&lt; std::pair&lt; size_t, CharType &gt;, size_t &gt; &amp;characterTransitionTable, const std::map&lt; size_t, std::vector&lt; size_t &gt;&gt; &amp;emptyTransitionTable=std::map&lt; size_t, std::vector&lt; size_t &gt;&gt;())'],['../classNFA.html#ae7303013f54a9f08704ae9b805c38650',1,'NFA::NFA(const NFA &amp;other)=default'],['../classNFA.html#a4d1844d6d9d20506be1d80dd6e81d011',1,'NFA::NFA(NFA &amp;&amp;other)=default']]],
+  ['nfaio',['NFAIO',['../classNFAIO.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['extracttokens',['extractTokens',['../classLexer.html#a631154ac348ea4db3e3a06992fa6245a',1,'Lexer']]]
+  ['combine',['combine',['../classNFA.html#a4ac23a73cb85dbff43bbcf2873dd4f9b',1,'NFA']]]
 ];

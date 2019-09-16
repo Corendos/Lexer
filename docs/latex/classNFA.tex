@@ -1,61 +1,49 @@
 \hypertarget{classNFA}{}\section{N\+FA Class Reference}
 \label{classNFA}\index{N\+FA@{N\+FA}}
+
+
+{\ttfamily \#include $<$N\+F\+A.\+hpp$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries N\+FA} (const Alphabet \&alphabet)\hypertarget{classNFA_ae8841f4b0dbe122187e2a64c73643769}{}\label{classNFA_ae8841f4b0dbe122187e2a64c73643769}
-
+\hyperlink{classNFA_ae8841f4b0dbe122187e2a64c73643769}{N\+FA} (const Alphabet \&alphabet)
 \item 
-{\bfseries N\+FA} (const Alphabet \&alphabet, const std\+::vector$<$ \hyperlink{structState}{State} $>$ \&states, const std\+::map$<$ std\+::pair$<$ size\+\_\+t, Char\+Type $>$, size\+\_\+t $>$ \&character\+Transition\+Table, const std\+::map$<$ size\+\_\+t, std\+::vector$<$ size\+\_\+t $>$$>$ \&empty\+Transition\+Table=std\+::map$<$ size\+\_\+t, std\+::vector$<$ size\+\_\+t $>$$>$())\hypertarget{classNFA_ae7fe25f259e31506f1358608f44b3d24}{}\label{classNFA_ae7fe25f259e31506f1358608f44b3d24}
-
+\hyperlink{classNFA_ae7fe25f259e31506f1358608f44b3d24}{N\+FA} (const Alphabet \&alphabet, const std\+::vector$<$ \hyperlink{structState}{State} $>$ \&states, const std\+::map$<$ std\+::pair$<$ size\+\_\+t, Char\+Type $>$, size\+\_\+t $>$ \&character\+Transition\+Table, const std\+::map$<$ size\+\_\+t, std\+::vector$<$ size\+\_\+t $>$$>$ \&empty\+Transition\+Table=std\+::map$<$ size\+\_\+t, std\+::vector$<$ size\+\_\+t $>$$>$())
 \item 
-{\bfseries N\+FA} (const \hyperlink{classNFA}{N\+FA} \&other)=default\hypertarget{classNFA_ae7303013f54a9f08704ae9b805c38650}{}\label{classNFA_ae7303013f54a9f08704ae9b805c38650}
-
+\hyperlink{classNFA_ae7303013f54a9f08704ae9b805c38650}{N\+FA} (const \hyperlink{classNFA}{N\+FA} \&other)=default
 \item 
-{\bfseries N\+FA} (\hyperlink{classNFA}{N\+FA} \&\&other)=default\hypertarget{classNFA_a4d1844d6d9d20506be1d80dd6e81d011}{}\label{classNFA_a4d1844d6d9d20506be1d80dd6e81d011}
-
+\hyperlink{classNFA_a4d1844d6d9d20506be1d80dd6e81d011}{N\+FA} (\hyperlink{classNFA}{N\+FA} \&\&other)=default
 \item 
-\hyperlink{classNFA}{N\+FA} \& {\bfseries operator=} (const \hyperlink{classNFA}{N\+FA} \&other)=default\hypertarget{classNFA_afad27066b284b7bf217df99a415d292d}{}\label{classNFA_afad27066b284b7bf217df99a415d292d}
-
+\hyperlink{classNFA}{N\+FA} \& \hyperlink{classNFA_afad27066b284b7bf217df99a415d292d}{operator=} (const \hyperlink{classNFA}{N\+FA} \&other)=default
 \item 
-\hyperlink{classNFA}{N\+FA} \& {\bfseries operator=} (\hyperlink{classNFA}{N\+FA} \&\&other)=default\hypertarget{classNFA_aa8a9cfe181878d1ee0279feeab1d46c5}{}\label{classNFA_aa8a9cfe181878d1ee0279feeab1d46c5}
-
+\hyperlink{classNFA}{N\+FA} \& \hyperlink{classNFA_aa8a9cfe181878d1ee0279feeab1d46c5}{operator=} (\hyperlink{classNFA}{N\+FA} \&\&other)=default
 \item 
-void {\bfseries add\+State} (const \hyperlink{structState}{State} \&state)\hypertarget{classNFA_a12aa5a3267473c67ad7c75f9d13f2157}{}\label{classNFA_a12aa5a3267473c67ad7c75f9d13f2157}
-
+void \hyperlink{classNFA_a12aa5a3267473c67ad7c75f9d13f2157}{add\+State} (const \hyperlink{structState}{State} \&state)
 \item 
-void {\bfseries add\+State} (\hyperlink{structState}{State} \&\&state)\hypertarget{classNFA_a01d23e3617878eede7d7e162fa29a990}{}\label{classNFA_a01d23e3617878eede7d7e162fa29a990}
-
+void \hyperlink{classNFA_a01d23e3617878eede7d7e162fa29a990}{add\+State} (\hyperlink{structState}{State} \&\&state)
 \item 
-void {\bfseries add\+Transition} (const \hyperlink{structState}{State} \&from, const Char\+Type \&character, const \hyperlink{structState}{State} \&to)\hypertarget{classNFA_aa1be789eb438068c1297f81cebde3986}{}\label{classNFA_aa1be789eb438068c1297f81cebde3986}
-
+void \hyperlink{classNFA_aa1be789eb438068c1297f81cebde3986}{add\+Transition} (const \hyperlink{structState}{State} \&from, const Char\+Type \&character, const \hyperlink{structState}{State} \&to)
 \item 
-void {\bfseries add\+Transition} (const \hyperlink{structState}{State} \&from, const \hyperlink{structState}{State} \&to)\hypertarget{classNFA_a8a806166448f5228f1cea02fb3c407e1}{}\label{classNFA_a8a806166448f5228f1cea02fb3c407e1}
-
+void \hyperlink{classNFA_a8a806166448f5228f1cea02fb3c407e1}{add\+Transition} (const \hyperlink{structState}{State} \&from, const \hyperlink{structState}{State} \&to)
 \item 
-void {\bfseries add\+Transitions} (const \hyperlink{structState}{State} \&from, const Alphabet \&characters, const \hyperlink{structState}{State} \&to)\hypertarget{classNFA_a84585fb96d8fbd4fa978f22389e22f12}{}\label{classNFA_a84585fb96d8fbd4fa978f22389e22f12}
-
+void \hyperlink{classNFA_a84585fb96d8fbd4fa978f22389e22f12}{add\+Transitions} (const \hyperlink{structState}{State} \&from, const Alphabet \&characters, const \hyperlink{structState}{State} \&to)
 \item 
-void {\bfseries add\+Transition} (const std\+::string \&from, const Char\+Type \&character, const std\+::string \&to)\hypertarget{classNFA_a42e23c1d2b811f41410e77c3e3f1f97c}{}\label{classNFA_a42e23c1d2b811f41410e77c3e3f1f97c}
-
+void \hyperlink{classNFA_a42e23c1d2b811f41410e77c3e3f1f97c}{add\+Transition} (const std\+::string \&from, const Char\+Type \&character, const std\+::string \&to)
 \item 
-void {\bfseries add\+Transition} (const std\+::string \&from, const std\+::string \&to)\hypertarget{classNFA_abac152eeed3df6612b6a7ce30d3dc796}{}\label{classNFA_abac152eeed3df6612b6a7ce30d3dc796}
-
+void \hyperlink{classNFA_abac152eeed3df6612b6a7ce30d3dc796}{add\+Transition} (const std\+::string \&from, const std\+::string \&to)
 \item 
-void {\bfseries add\+Transitions} (const std\+::string \&from, const Alphabet \&characters, const std\+::string \&to)\hypertarget{classNFA_ae81e75d4f68ca63090bf6eeb49f3f833}{}\label{classNFA_ae81e75d4f68ca63090bf6eeb49f3f833}
-
+void \hyperlink{classNFA_ae81e75d4f68ca63090bf6eeb49f3f833}{add\+Transitions} (const std\+::string \&from, const Alphabet \&characters, const std\+::string \&to)
 \item 
-void {\bfseries print\+Debug} () const \hypertarget{classNFA_a53ad6f0fa9646d8ffab9427677833164}{}\label{classNFA_a53ad6f0fa9646d8ffab9427677833164}
-
+void \hyperlink{classNFA_a53ad6f0fa9646d8ffab9427677833164}{print\+Debug} () const 
 \item 
-\hyperlink{classNFA}{N\+FA} {\bfseries to\+D\+FA} () const \hypertarget{classNFA_ac6fde2f66abcaf39119e5e4ac86056eb}{}\label{classNFA_ac6fde2f66abcaf39119e5e4ac86056eb}
-
+\hyperlink{classNFA}{N\+FA} \hyperlink{classNFA_ac6fde2f66abcaf39119e5e4ac86056eb}{to\+D\+FA} () const 
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 static \hyperlink{classNFA}{N\+FA} \hyperlink{classNFA_a4ac23a73cb85dbff43bbcf2873dd4f9b}{combine} (const std\+::vector$<$ \hyperlink{classNFA}{N\+FA} $>$ \&nfas)
-\begin{DoxyCompactList}\small\item\em Combine multiple \hyperlink{classNFA}{N\+FA} to a single \hyperlink{classNFA}{N\+FA}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{DoxyCompactItemize}
 \subsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -67,7 +55,196 @@ class {\bfseries N\+F\+A\+IO}\hypertarget{classNFA_a63eedf3dea9b1923c2f1d7e49bd0
 \end{DoxyCompactItemize}
 
 
+\subsection{Detailed Description}
+A class representing a Non-\/\+Deterministic/\+Deterministic Finite Automaton. Since a D\+FA is a particular \hyperlink{classNFA}{N\+FA}, I have decided to combine the 2 notions. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{N\+FA@{N\+FA}!N\+FA@{N\+FA}}
+\index{N\+FA@{N\+FA}!N\+FA@{N\+FA}}
+\subsubsection[{\texorpdfstring{N\+F\+A(const Alphabet \&alphabet)}{NFA(const Alphabet &alphabet)}}]{\setlength{\rightskip}{0pt plus 5cm}N\+F\+A\+::\+N\+FA (
+\begin{DoxyParamCaption}
+\item[{const Alphabet \&}]{alphabet}
+\end{DoxyParamCaption}
+)}\hypertarget{classNFA_ae8841f4b0dbe122187e2a64c73643769}{}\label{classNFA_ae8841f4b0dbe122187e2a64c73643769}
+A constructor. Constructs an empty \hyperlink{classNFA}{N\+FA} using the accepted Alphabet. 
+\begin{DoxyParams}{Parameters}
+{\em alphabet} & a std\+::string representing the set of accepted characters. \\
+\hline
+\end{DoxyParams}
+\index{N\+FA@{N\+FA}!N\+FA@{N\+FA}}
+\index{N\+FA@{N\+FA}!N\+FA@{N\+FA}}
+\subsubsection[{\texorpdfstring{N\+F\+A(const Alphabet \&alphabet, const std\+::vector$<$ State $>$ \&states, const std\+::map$<$ std\+::pair$<$ size\+\_\+t, Char\+Type $>$, size\+\_\+t $>$ \&character\+Transition\+Table, const std\+::map$<$ size\+\_\+t, std\+::vector$<$ size\+\_\+t $>$$>$ \&empty\+Transition\+Table=std\+::map$<$ size\+\_\+t, std\+::vector$<$ size\+\_\+t $>$$>$())}{NFA(const Alphabet &alphabet, const std::vector< State > &states, const std::map< std::pair< size_t, CharType >, size_t > &characterTransitionTable, const std::map< size_t, std::vector< size_t >> &emptyTransitionTable=std::map< size_t, std::vector< size_t >>())}}]{\setlength{\rightskip}{0pt plus 5cm}N\+F\+A\+::\+N\+FA (
+\begin{DoxyParamCaption}
+\item[{const Alphabet \&}]{alphabet, }
+\item[{const std\+::vector$<$ {\bf State} $>$ \&}]{states, }
+\item[{const std\+::map$<$ std\+::pair$<$ size\+\_\+t, Char\+Type $>$, size\+\_\+t $>$ \&}]{character\+Transition\+Table, }
+\item[{const std\+::map$<$ size\+\_\+t, std\+::vector$<$ size\+\_\+t $>$$>$ \&}]{empty\+Transition\+Table = {\ttfamily std\+:\+:map$<$size\+\_\+t,~std\+:\+:vector$<$size\+\_\+t$>$$>$()}}
+\end{DoxyParamCaption}
+)}\hypertarget{classNFA_ae7fe25f259e31506f1358608f44b3d24}{}\label{classNFA_ae7fe25f259e31506f1358608f44b3d24}
+A constructor. Constructs a \hyperlink{classNFA}{N\+FA} using the accepted alphabet, the transitions and the states. 
+\begin{DoxyParams}{Parameters}
+{\em alphabet} & a std\+::string representing the set of accepted characters. \\
+\hline
+{\em states} & a std\+::vector$<$\+State$>$ representing the list of states. \\
+\hline
+{\em alphabet} & a std\+::map$<$std\+::pair$<$size\+\_\+t, Char\+Type$>$, size\+\_\+t$>$ representing non-\/empty transitions. \\
+\hline
+{\em alphabet} & a std\+::map$<$size\+\_\+t, std\+::vector$<$size\+\_\+t$>$$>$ representing empty transitions. \\
+\hline
+\end{DoxyParams}
+\index{N\+FA@{N\+FA}!N\+FA@{N\+FA}}
+\index{N\+FA@{N\+FA}!N\+FA@{N\+FA}}
+\subsubsection[{\texorpdfstring{N\+F\+A(const N\+F\+A \&other)=default}{NFA(const NFA &other)=default}}]{\setlength{\rightskip}{0pt plus 5cm}N\+F\+A\+::\+N\+FA (
+\begin{DoxyParamCaption}
+\item[{const {\bf N\+FA} \&}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{classNFA_ae7303013f54a9f08704ae9b805c38650}{}\label{classNFA_ae7303013f54a9f08704ae9b805c38650}
+A default copy constructor. Constructs a \hyperlink{classNFA}{N\+FA} using another \hyperlink{classNFA}{N\+FA}. 
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \hyperlink{classNFA}{N\+FA}. \\
+\hline
+\end{DoxyParams}
+\index{N\+FA@{N\+FA}!N\+FA@{N\+FA}}
+\index{N\+FA@{N\+FA}!N\+FA@{N\+FA}}
+\subsubsection[{\texorpdfstring{N\+F\+A(\+N\+F\+A \&\&other)=default}{NFA(NFA &&other)=default}}]{\setlength{\rightskip}{0pt plus 5cm}N\+F\+A\+::\+N\+FA (
+\begin{DoxyParamCaption}
+\item[{{\bf N\+FA} \&\&}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{classNFA_a4d1844d6d9d20506be1d80dd6e81d011}{}\label{classNFA_a4d1844d6d9d20506be1d80dd6e81d011}
+A default move constructor. Constructs a \hyperlink{classNFA}{N\+FA} by moving another \hyperlink{classNFA}{N\+FA}. 
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \hyperlink{classNFA}{N\+FA}. \\
+\hline
+\end{DoxyParams}
+
+
 \subsection{Member Function Documentation}
+\index{N\+FA@{N\+FA}!add\+State@{add\+State}}
+\index{add\+State@{add\+State}!N\+FA@{N\+FA}}
+\subsubsection[{\texorpdfstring{add\+State(const State \&state)}{addState(const State &state)}}]{\setlength{\rightskip}{0pt plus 5cm}void N\+F\+A\+::add\+State (
+\begin{DoxyParamCaption}
+\item[{const {\bf State} \&}]{state}
+\end{DoxyParamCaption}
+)}\hypertarget{classNFA_a12aa5a3267473c67ad7c75f9d13f2157}{}\label{classNFA_a12aa5a3267473c67ad7c75f9d13f2157}
+Add a state to the \hyperlink{classNFA}{N\+FA} by copying it. 
+\begin{DoxyParams}{Parameters}
+{\em state} & The \hyperlink{structState}{State} to add. \\
+\hline
+\end{DoxyParams}
+\index{N\+FA@{N\+FA}!add\+State@{add\+State}}
+\index{add\+State@{add\+State}!N\+FA@{N\+FA}}
+\subsubsection[{\texorpdfstring{add\+State(\+State \&\&state)}{addState(State &&state)}}]{\setlength{\rightskip}{0pt plus 5cm}void N\+F\+A\+::add\+State (
+\begin{DoxyParamCaption}
+\item[{{\bf State} \&\&}]{state}
+\end{DoxyParamCaption}
+)}\hypertarget{classNFA_a01d23e3617878eede7d7e162fa29a990}{}\label{classNFA_a01d23e3617878eede7d7e162fa29a990}
+Add a state to the \hyperlink{classNFA}{N\+FA} by moving it. 
+\begin{DoxyParams}{Parameters}
+{\em state} & The \hyperlink{structState}{State} to add. \\
+\hline
+\end{DoxyParams}
+\index{N\+FA@{N\+FA}!add\+Transition@{add\+Transition}}
+\index{add\+Transition@{add\+Transition}!N\+FA@{N\+FA}}
+\subsubsection[{\texorpdfstring{add\+Transition(const State \&from, const Char\+Type \&character, const State \&to)}{addTransition(const State &from, const CharType &character, const State &to)}}]{\setlength{\rightskip}{0pt plus 5cm}void N\+F\+A\+::add\+Transition (
+\begin{DoxyParamCaption}
+\item[{const {\bf State} \&}]{from, }
+\item[{const Char\+Type \&}]{character, }
+\item[{const {\bf State} \&}]{to}
+\end{DoxyParamCaption}
+)}\hypertarget{classNFA_aa1be789eb438068c1297f81cebde3986}{}\label{classNFA_aa1be789eb438068c1297f81cebde3986}
+Add a transition labelled by a specific character. 
+\begin{DoxyParams}{Parameters}
+{\em from} & The \hyperlink{structState}{State} where the transition comes from. \\
+\hline
+{\em from} & The character laebelling the transition. \\
+\hline
+{\em to} & The \hyperlink{structState}{State} where the transition goes to. \\
+\hline
+\end{DoxyParams}
+\index{N\+FA@{N\+FA}!add\+Transition@{add\+Transition}}
+\index{add\+Transition@{add\+Transition}!N\+FA@{N\+FA}}
+\subsubsection[{\texorpdfstring{add\+Transition(const State \&from, const State \&to)}{addTransition(const State &from, const State &to)}}]{\setlength{\rightskip}{0pt plus 5cm}void N\+F\+A\+::add\+Transition (
+\begin{DoxyParamCaption}
+\item[{const {\bf State} \&}]{from, }
+\item[{const {\bf State} \&}]{to}
+\end{DoxyParamCaption}
+)}\hypertarget{classNFA_a8a806166448f5228f1cea02fb3c407e1}{}\label{classNFA_a8a806166448f5228f1cea02fb3c407e1}
+Add an empty transition. 
+\begin{DoxyParams}{Parameters}
+{\em from} & The \hyperlink{structState}{State} where the transition comes from. \\
+\hline
+{\em to} & The \hyperlink{structState}{State} where the transition goes to. \\
+\hline
+\end{DoxyParams}
+\index{N\+FA@{N\+FA}!add\+Transition@{add\+Transition}}
+\index{add\+Transition@{add\+Transition}!N\+FA@{N\+FA}}
+\subsubsection[{\texorpdfstring{add\+Transition(const std\+::string \&from, const Char\+Type \&character, const std\+::string \&to)}{addTransition(const std::string &from, const CharType &character, const std::string &to)}}]{\setlength{\rightskip}{0pt plus 5cm}void N\+F\+A\+::add\+Transition (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{from, }
+\item[{const Char\+Type \&}]{character, }
+\item[{const std\+::string \&}]{to}
+\end{DoxyParamCaption}
+)}\hypertarget{classNFA_a42e23c1d2b811f41410e77c3e3f1f97c}{}\label{classNFA_a42e23c1d2b811f41410e77c3e3f1f97c}
+Add a transition labelled by a specific character. 
+\begin{DoxyParams}{Parameters}
+{\em from} & The state name where the transition comes from. \\
+\hline
+{\em from} & The character laebelling the transition. \\
+\hline
+{\em to} & The state name where the transition goes to. \\
+\hline
+\end{DoxyParams}
+\index{N\+FA@{N\+FA}!add\+Transition@{add\+Transition}}
+\index{add\+Transition@{add\+Transition}!N\+FA@{N\+FA}}
+\subsubsection[{\texorpdfstring{add\+Transition(const std\+::string \&from, const std\+::string \&to)}{addTransition(const std::string &from, const std::string &to)}}]{\setlength{\rightskip}{0pt plus 5cm}void N\+F\+A\+::add\+Transition (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{from, }
+\item[{const std\+::string \&}]{to}
+\end{DoxyParamCaption}
+)}\hypertarget{classNFA_abac152eeed3df6612b6a7ce30d3dc796}{}\label{classNFA_abac152eeed3df6612b6a7ce30d3dc796}
+Add an empty transition. 
+\begin{DoxyParams}{Parameters}
+{\em from} & The state name where the transition comes from. \\
+\hline
+{\em to} & The state name where the transition goes to. \\
+\hline
+\end{DoxyParams}
+\index{N\+FA@{N\+FA}!add\+Transitions@{add\+Transitions}}
+\index{add\+Transitions@{add\+Transitions}!N\+FA@{N\+FA}}
+\subsubsection[{\texorpdfstring{add\+Transitions(const State \&from, const Alphabet \&characters, const State \&to)}{addTransitions(const State &from, const Alphabet &characters, const State &to)}}]{\setlength{\rightskip}{0pt plus 5cm}void N\+F\+A\+::add\+Transitions (
+\begin{DoxyParamCaption}
+\item[{const {\bf State} \&}]{from, }
+\item[{const Alphabet \&}]{characters, }
+\item[{const {\bf State} \&}]{to}
+\end{DoxyParamCaption}
+)}\hypertarget{classNFA_a84585fb96d8fbd4fa978f22389e22f12}{}\label{classNFA_a84585fb96d8fbd4fa978f22389e22f12}
+Add transitions labelled by specific characters. 
+\begin{DoxyParams}{Parameters}
+{\em from} & The \hyperlink{structState}{State} where the transitions come from. \\
+\hline
+{\em from} & The characters labelling the transitions. \\
+\hline
+{\em to} & The \hyperlink{structState}{State} where the transitions go to. \\
+\hline
+\end{DoxyParams}
+\index{N\+FA@{N\+FA}!add\+Transitions@{add\+Transitions}}
+\index{add\+Transitions@{add\+Transitions}!N\+FA@{N\+FA}}
+\subsubsection[{\texorpdfstring{add\+Transitions(const std\+::string \&from, const Alphabet \&characters, const std\+::string \&to)}{addTransitions(const std::string &from, const Alphabet &characters, const std::string &to)}}]{\setlength{\rightskip}{0pt plus 5cm}void N\+F\+A\+::add\+Transitions (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{from, }
+\item[{const Alphabet \&}]{characters, }
+\item[{const std\+::string \&}]{to}
+\end{DoxyParamCaption}
+)}\hypertarget{classNFA_ae81e75d4f68ca63090bf6eeb49f3f833}{}\label{classNFA_ae81e75d4f68ca63090bf6eeb49f3f833}
+Add transitions labelled by specific characters. 
+\begin{DoxyParams}{Parameters}
+{\em from} & The state name where the transitions come from. \\
+\hline
+{\em from} & The characters labelling the transitions. \\
+\hline
+{\em to} & The state name where the transitions go to. \\
+\hline
+\end{DoxyParams}
 \index{N\+FA@{N\+FA}!combine@{combine}}
 \index{combine@{combine}!N\+FA@{N\+FA}}
 \subsubsection[{\texorpdfstring{combine(const std\+::vector$<$ N\+F\+A $>$ \&nfas)}{combine(const std::vector< NFA > &nfas)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf N\+FA} N\+F\+A\+::combine (
@@ -75,9 +252,7 @@ class {\bfseries N\+F\+A\+IO}\hypertarget{classNFA_a63eedf3dea9b1923c2f1d7e49bd0
 \item[{const std\+::vector$<$ {\bf N\+FA} $>$ \&}]{nfas}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classNFA_a4ac23a73cb85dbff43bbcf2873dd4f9b}{}\label{classNFA_a4ac23a73cb85dbff43bbcf2873dd4f9b}
-
-
-Combine multiple \hyperlink{classNFA}{N\+FA} to a single \hyperlink{classNFA}{N\+FA}. 
+Combine multiple N\+F\+As to a single \hyperlink{classNFA}{N\+FA}
 
 
 \begin{DoxyParams}{Parameters}
@@ -86,6 +261,53 @@ Combine multiple \hyperlink{classNFA}{N\+FA} to a single \hyperlink{classNFA}{N\
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 the resulting \hyperlink{classNFA}{N\+FA} 
+\end{DoxyReturn}
+\index{N\+FA@{N\+FA}!operator=@{operator=}}
+\index{operator=@{operator=}!N\+FA@{N\+FA}}
+\subsubsection[{\texorpdfstring{operator=(const N\+F\+A \&other)=default}{operator=(const NFA &other)=default}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf N\+FA}\& N\+F\+A\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf N\+FA} \&}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{classNFA_afad27066b284b7bf217df99a415d292d}{}\label{classNFA_afad27066b284b7bf217df99a415d292d}
+A default copy assignment operator. Assigns a \hyperlink{classNFA}{N\+FA} to the current \hyperlink{classNFA}{N\+FA} by copying it. 
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \hyperlink{classNFA}{N\+FA}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a reference to the current \hyperlink{classNFA}{N\+FA}. 
+\end{DoxyReturn}
+\index{N\+FA@{N\+FA}!operator=@{operator=}}
+\index{operator=@{operator=}!N\+FA@{N\+FA}}
+\subsubsection[{\texorpdfstring{operator=(\+N\+F\+A \&\&other)=default}{operator=(NFA &&other)=default}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf N\+FA}\& N\+F\+A\+::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf N\+FA} \&\&}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{classNFA_aa8a9cfe181878d1ee0279feeab1d46c5}{}\label{classNFA_aa8a9cfe181878d1ee0279feeab1d46c5}
+A default move assignment operator. Assigns a \hyperlink{classNFA}{N\+FA} to the current \hyperlink{classNFA}{N\+FA} by moving it. 
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \hyperlink{classNFA}{N\+FA}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a reference to the current \hyperlink{classNFA}{N\+FA}. 
+\end{DoxyReturn}
+\index{N\+FA@{N\+FA}!print\+Debug@{print\+Debug}}
+\index{print\+Debug@{print\+Debug}!N\+FA@{N\+FA}}
+\subsubsection[{\texorpdfstring{print\+Debug() const }{printDebug() const }}]{\setlength{\rightskip}{0pt plus 5cm}void N\+F\+A\+::print\+Debug (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classNFA_a53ad6f0fa9646d8ffab9427677833164}{}\label{classNFA_a53ad6f0fa9646d8ffab9427677833164}
+Print the \hyperlink{classNFA}{N\+FA} in the console. This is a debug function. \index{N\+FA@{N\+FA}!to\+D\+FA@{to\+D\+FA}}
+\index{to\+D\+FA@{to\+D\+FA}!N\+FA@{N\+FA}}
+\subsubsection[{\texorpdfstring{to\+D\+F\+A() const }{toDFA() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf N\+FA} N\+F\+A\+::to\+D\+FA (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classNFA_ac6fde2f66abcaf39119e5e4ac86056eb}{}\label{classNFA_ac6fde2f66abcaf39119e5e4ac86056eb}
+Transform a \hyperlink{classNFA}{N\+FA} to a D\+FA. \begin{DoxyReturn}{Returns}
+a \hyperlink{classNFA}{N\+FA} representing the corresponding D\+FA 
 \end{DoxyReturn}
 
 

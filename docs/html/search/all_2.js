@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['isaccepting',['isAccepting',['../structState.html#ab48af65a07f9ae4dfb880bacfbd2e812',1,'State']]],
-  ['isstarting',['isStarting',['../structState.html#a578fb1731639aab7ee201241ac00b728',1,'State']]]
+  ['extracttokens',['extractTokens',['../classLexer.html#a631154ac348ea4db3e3a06992fa6245a',1,'Lexer']]]
 ];

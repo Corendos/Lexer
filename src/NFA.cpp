@@ -480,12 +480,6 @@ bool NFA::isStateMarked(const MarkedState& ms) {
 // Static methods
 
 
-/**
- * @brief Combine multiple NFA to a single NFA
- * 
- * @param nfas  the list of NFA we want to combine
- * @return      the resulting NFA
- */
 NFA NFA::combine(const std::vector<NFA>& nfas) {
     size_t indexOffset = 1;
 
