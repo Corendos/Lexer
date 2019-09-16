@@ -1,62 +1,92 @@
-\hypertarget{classNFA}{}\doxysection{N\+FA Class Reference}
-\label{classNFA}\index{NFA@{NFA}}
-\doxysubsection*{Public Member Functions}
+\hypertarget{classNFA}{}\section{N\+FA Class Reference}
+\label{classNFA}\index{N\+FA@{N\+FA}}
+\subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classNFA_ae8841f4b0dbe122187e2a64c73643769}\label{classNFA_ae8841f4b0dbe122187e2a64c73643769}} 
-{\bfseries N\+FA} (const Alphabet \&alphabet)
+{\bfseries N\+FA} (const Alphabet \&alphabet)\hypertarget{classNFA_ae8841f4b0dbe122187e2a64c73643769}{}\label{classNFA_ae8841f4b0dbe122187e2a64c73643769}
+
 \item 
-\mbox{\Hypertarget{classNFA_afb8fe89e9b202f05d2137c17d067628d}\label{classNFA_afb8fe89e9b202f05d2137c17d067628d}} 
-{\bfseries N\+FA} (const std\+::vector$<$ \mbox{\hyperlink{structState}{State}} $>$ \&states, const std\+::map$<$ std\+::pair$<$ size\+\_\+t, Char\+Type $>$, size\+\_\+t $>$ \&character\+Transition\+Table, const Alphabet \&alphabet)
+{\bfseries N\+FA} (const Alphabet \&alphabet, const std\+::vector$<$ \hyperlink{structState}{State} $>$ \&states, const std\+::map$<$ std\+::pair$<$ size\+\_\+t, Char\+Type $>$, size\+\_\+t $>$ \&character\+Transition\+Table, const std\+::map$<$ size\+\_\+t, std\+::vector$<$ size\+\_\+t $>$$>$ \&empty\+Transition\+Table=std\+::map$<$ size\+\_\+t, std\+::vector$<$ size\+\_\+t $>$$>$())\hypertarget{classNFA_ae7fe25f259e31506f1358608f44b3d24}{}\label{classNFA_ae7fe25f259e31506f1358608f44b3d24}
+
 \item 
-\mbox{\Hypertarget{classNFA_a2ec5799fe0155a23877f6eb7ca1ba579}\label{classNFA_a2ec5799fe0155a23877f6eb7ca1ba579}} 
-{\bfseries N\+FA} (\mbox{\hyperlink{classNFA}{N\+FA}} \&other)=default
+{\bfseries N\+FA} (const \hyperlink{classNFA}{N\+FA} \&other)=default\hypertarget{classNFA_ae7303013f54a9f08704ae9b805c38650}{}\label{classNFA_ae7303013f54a9f08704ae9b805c38650}
+
 \item 
-\mbox{\Hypertarget{classNFA_a4d1844d6d9d20506be1d80dd6e81d011}\label{classNFA_a4d1844d6d9d20506be1d80dd6e81d011}} 
-{\bfseries N\+FA} (\mbox{\hyperlink{classNFA}{N\+FA}} \&\&other)=default
+{\bfseries N\+FA} (\hyperlink{classNFA}{N\+FA} \&\&other)=default\hypertarget{classNFA_a4d1844d6d9d20506be1d80dd6e81d011}{}\label{classNFA_a4d1844d6d9d20506be1d80dd6e81d011}
+
 \item 
-\mbox{\Hypertarget{classNFA_a80cdf332cddf469f86327ec7a8eae0d4}\label{classNFA_a80cdf332cddf469f86327ec7a8eae0d4}} 
-\mbox{\hyperlink{classNFA}{N\+FA}} \& {\bfseries operator=} (\mbox{\hyperlink{classNFA}{N\+FA}} \&other)=default
+\hyperlink{classNFA}{N\+FA} \& {\bfseries operator=} (const \hyperlink{classNFA}{N\+FA} \&other)=default\hypertarget{classNFA_afad27066b284b7bf217df99a415d292d}{}\label{classNFA_afad27066b284b7bf217df99a415d292d}
+
 \item 
-\mbox{\Hypertarget{classNFA_aa8a9cfe181878d1ee0279feeab1d46c5}\label{classNFA_aa8a9cfe181878d1ee0279feeab1d46c5}} 
-\mbox{\hyperlink{classNFA}{N\+FA}} \& {\bfseries operator=} (\mbox{\hyperlink{classNFA}{N\+FA}} \&\&other)=default
+\hyperlink{classNFA}{N\+FA} \& {\bfseries operator=} (\hyperlink{classNFA}{N\+FA} \&\&other)=default\hypertarget{classNFA_aa8a9cfe181878d1ee0279feeab1d46c5}{}\label{classNFA_aa8a9cfe181878d1ee0279feeab1d46c5}
+
 \item 
-\mbox{\Hypertarget{classNFA_a12aa5a3267473c67ad7c75f9d13f2157}\label{classNFA_a12aa5a3267473c67ad7c75f9d13f2157}} 
-void {\bfseries add\+State} (const \mbox{\hyperlink{structState}{State}} \&state)
+void {\bfseries add\+State} (const \hyperlink{structState}{State} \&state)\hypertarget{classNFA_a12aa5a3267473c67ad7c75f9d13f2157}{}\label{classNFA_a12aa5a3267473c67ad7c75f9d13f2157}
+
 \item 
-\mbox{\Hypertarget{classNFA_a01d23e3617878eede7d7e162fa29a990}\label{classNFA_a01d23e3617878eede7d7e162fa29a990}} 
-void {\bfseries add\+State} (\mbox{\hyperlink{structState}{State}} \&\&state)
+void {\bfseries add\+State} (\hyperlink{structState}{State} \&\&state)\hypertarget{classNFA_a01d23e3617878eede7d7e162fa29a990}{}\label{classNFA_a01d23e3617878eede7d7e162fa29a990}
+
 \item 
-\mbox{\Hypertarget{classNFA_aa1be789eb438068c1297f81cebde3986}\label{classNFA_aa1be789eb438068c1297f81cebde3986}} 
-void {\bfseries add\+Transition} (const \mbox{\hyperlink{structState}{State}} \&from, const Char\+Type \&character, const \mbox{\hyperlink{structState}{State}} \&to)
+void {\bfseries add\+Transition} (const \hyperlink{structState}{State} \&from, const Char\+Type \&character, const \hyperlink{structState}{State} \&to)\hypertarget{classNFA_aa1be789eb438068c1297f81cebde3986}{}\label{classNFA_aa1be789eb438068c1297f81cebde3986}
+
 \item 
-\mbox{\Hypertarget{classNFA_a8a806166448f5228f1cea02fb3c407e1}\label{classNFA_a8a806166448f5228f1cea02fb3c407e1}} 
-void {\bfseries add\+Transition} (const \mbox{\hyperlink{structState}{State}} \&from, const \mbox{\hyperlink{structState}{State}} \&to)
+void {\bfseries add\+Transition} (const \hyperlink{structState}{State} \&from, const \hyperlink{structState}{State} \&to)\hypertarget{classNFA_a8a806166448f5228f1cea02fb3c407e1}{}\label{classNFA_a8a806166448f5228f1cea02fb3c407e1}
+
 \item 
-\mbox{\Hypertarget{classNFA_a84585fb96d8fbd4fa978f22389e22f12}\label{classNFA_a84585fb96d8fbd4fa978f22389e22f12}} 
-void {\bfseries add\+Transitions} (const \mbox{\hyperlink{structState}{State}} \&from, const Alphabet \&characters, const \mbox{\hyperlink{structState}{State}} \&to)
+void {\bfseries add\+Transitions} (const \hyperlink{structState}{State} \&from, const Alphabet \&characters, const \hyperlink{structState}{State} \&to)\hypertarget{classNFA_a84585fb96d8fbd4fa978f22389e22f12}{}\label{classNFA_a84585fb96d8fbd4fa978f22389e22f12}
+
 \item 
-\mbox{\Hypertarget{classNFA_a42e23c1d2b811f41410e77c3e3f1f97c}\label{classNFA_a42e23c1d2b811f41410e77c3e3f1f97c}} 
-void {\bfseries add\+Transition} (const std\+::string \&from, const Char\+Type \&character, const std\+::string \&to)
+void {\bfseries add\+Transition} (const std\+::string \&from, const Char\+Type \&character, const std\+::string \&to)\hypertarget{classNFA_a42e23c1d2b811f41410e77c3e3f1f97c}{}\label{classNFA_a42e23c1d2b811f41410e77c3e3f1f97c}
+
 \item 
-\mbox{\Hypertarget{classNFA_abac152eeed3df6612b6a7ce30d3dc796}\label{classNFA_abac152eeed3df6612b6a7ce30d3dc796}} 
-void {\bfseries add\+Transition} (const std\+::string \&from, const std\+::string \&to)
+void {\bfseries add\+Transition} (const std\+::string \&from, const std\+::string \&to)\hypertarget{classNFA_abac152eeed3df6612b6a7ce30d3dc796}{}\label{classNFA_abac152eeed3df6612b6a7ce30d3dc796}
+
 \item 
-\mbox{\Hypertarget{classNFA_ae81e75d4f68ca63090bf6eeb49f3f833}\label{classNFA_ae81e75d4f68ca63090bf6eeb49f3f833}} 
-void {\bfseries add\+Transitions} (const std\+::string \&from, const Alphabet \&characters, const std\+::string \&to)
+void {\bfseries add\+Transitions} (const std\+::string \&from, const Alphabet \&characters, const std\+::string \&to)\hypertarget{classNFA_ae81e75d4f68ca63090bf6eeb49f3f833}{}\label{classNFA_ae81e75d4f68ca63090bf6eeb49f3f833}
+
 \item 
-\mbox{\Hypertarget{classNFA_a94e869d14ffa2669e2e6afe8ecb02d54}\label{classNFA_a94e869d14ffa2669e2e6afe8ecb02d54}} 
-void {\bfseries print\+Debug} () const
+void {\bfseries print\+Debug} () const \hypertarget{classNFA_a53ad6f0fa9646d8ffab9427677833164}{}\label{classNFA_a53ad6f0fa9646d8ffab9427677833164}
+
 \item 
-\mbox{\Hypertarget{classNFA_ad78a3ec917a37a7f1000b699f626e03b}\label{classNFA_ad78a3ec917a37a7f1000b699f626e03b}} 
-\mbox{\hyperlink{classNFA}{N\+FA}} {\bfseries to\+D\+FA} () const
+\hyperlink{classNFA}{N\+FA} {\bfseries to\+D\+FA} () const \hypertarget{classNFA_ac6fde2f66abcaf39119e5e4ac86056eb}{}\label{classNFA_ac6fde2f66abcaf39119e5e4ac86056eb}
+
 \end{DoxyCompactItemize}
-\doxysubsection*{Friends}
+\subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classNFA_a4ed369a6ee2b54f1b68897a0e9c859a2}\label{classNFA_a4ed369a6ee2b54f1b68897a0e9c859a2}} 
-class {\bfseries Traverser}
+static \hyperlink{classNFA}{N\+FA} \hyperlink{classNFA_a4ac23a73cb85dbff43bbcf2873dd4f9b}{combine} (const std\+::vector$<$ \hyperlink{classNFA}{N\+FA} $>$ \&nfas)
+\begin{DoxyCompactList}\small\item\em Combine multiple \hyperlink{classNFA}{N\+FA} to a single \hyperlink{classNFA}{N\+FA}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class {\bfseries Traverser}\hypertarget{classNFA_a4ed369a6ee2b54f1b68897a0e9c859a2}{}\label{classNFA_a4ed369a6ee2b54f1b68897a0e9c859a2}
+
+\item 
+class {\bfseries N\+F\+A\+IO}\hypertarget{classNFA_a63eedf3dea9b1923c2f1d7e49bd0593b}{}\label{classNFA_a63eedf3dea9b1923c2f1d7e49bd0593b}
+
 \end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{N\+FA@{N\+FA}!combine@{combine}}
+\index{combine@{combine}!N\+FA@{N\+FA}}
+\subsubsection[{\texorpdfstring{combine(const std\+::vector$<$ N\+F\+A $>$ \&nfas)}{combine(const std::vector< NFA > &nfas)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf N\+FA} N\+F\+A\+::combine (
+\begin{DoxyParamCaption}
+\item[{const std\+::vector$<$ {\bf N\+FA} $>$ \&}]{nfas}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classNFA_a4ac23a73cb85dbff43bbcf2873dd4f9b}{}\label{classNFA_a4ac23a73cb85dbff43bbcf2873dd4f9b}
+
+
+Combine multiple \hyperlink{classNFA}{N\+FA} to a single \hyperlink{classNFA}{N\+FA}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nfas} & the list of \hyperlink{classNFA}{N\+FA} we want to combine \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the resulting \hyperlink{classNFA}{N\+FA} 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

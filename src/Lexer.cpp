@@ -1,7 +1,7 @@
 #include "Lexer.hpp"
 
 Lexer::Lexer(const NFA& nfa) :
-    mTraverser(nfa), mHasLastValidState(false), mStartedToReadToken(false),
+    mTraverser(nfa), mHasLastValidState(false),
     mLastStartPosition(0), mCurrentPosition(0), mStartPosition(0) {
     mTempBuffer.reserve(1000);
 }

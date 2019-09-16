@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['tokeninfo_9',['TokenInfo',['../structTokenInfo.html',1,'']]],
-  ['traverser_10',['Traverser',['../classTraverser.html',1,'']]]
+  ['payload',['payload',['../structState.html#a19ea4225f19a3281e2d6c890b0c09312',1,'State']]]
 ];

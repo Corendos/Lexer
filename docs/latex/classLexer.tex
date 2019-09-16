@@ -1,14 +1,58 @@
-\hypertarget{classLexer}{}\doxysection{Lexer Class Reference}
+\hypertarget{classLexer}{}\section{Lexer Class Reference}
 \label{classLexer}\index{Lexer@{Lexer}}
-\doxysubsection*{Public Member Functions}
+
+
+{\ttfamily \#include $<$Lexer.\+hpp$>$}
+
+\subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classLexer_adbbd9373db0da3c2a5529e382d682cb2}\label{classLexer_adbbd9373db0da3c2a5529e382d682cb2}} 
-{\bfseries Lexer} (const \mbox{\hyperlink{classNFA}{N\+FA}} \&nfa)
+\hyperlink{classLexer_adbbd9373db0da3c2a5529e382d682cb2}{Lexer} (const \hyperlink{classNFA}{N\+FA} \&nfa)
 \item 
-\mbox{\Hypertarget{classLexer_a631154ac348ea4db3e3a06992fa6245a}\label{classLexer_a631154ac348ea4db3e3a06992fa6245a}} 
-std\+::vector$<$ std\+::pair$<$ std\+::string, std\+::string $>$ $>$ {\bfseries extract\+Tokens} (const std\+::string \&input)
+std\+::vector$<$ std\+::pair$<$ std\+::string, std\+::string $>$ $>$ \hyperlink{classLexer_a631154ac348ea4db3e3a06992fa6245a}{extract\+Tokens} (const std\+::string \&input)
+\item 
+std\+::pair$<$ bool, std\+::pair$<$ std\+::string, std\+::string $>$ $>$ \hyperlink{classLexer_afd24d0694acffafff7f705cefe2ece21}{next} (const std\+::string \&stream)
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A lexer class. Represent a lexer. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Lexer@{Lexer}!Lexer@{Lexer}}
+\index{Lexer@{Lexer}!Lexer@{Lexer}}
+\subsubsection[{\texorpdfstring{Lexer(const N\+F\+A \&nfa)}{Lexer(const NFA &nfa)}}]{\setlength{\rightskip}{0pt plus 5cm}Lexer\+::\+Lexer (
+\begin{DoxyParamCaption}
+\item[{const {\bf N\+FA} \&}]{nfa}
+\end{DoxyParamCaption}
+)}\hypertarget{classLexer_adbbd9373db0da3c2a5529e382d682cb2}{}\label{classLexer_adbbd9373db0da3c2a5529e382d682cb2}
+A constructor Constructs a lexer from a \hyperlink{classNFA}{N\+FA} representing the detected lexic. 
+
+\subsection{Member Function Documentation}
+\index{Lexer@{Lexer}!extract\+Tokens@{extract\+Tokens}}
+\index{extract\+Tokens@{extract\+Tokens}!Lexer@{Lexer}}
+\subsubsection[{\texorpdfstring{extract\+Tokens(const std\+::string \&input)}{extractTokens(const std::string &input)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ std\+::pair$<$ std\+::string, std\+::string $>$ $>$ Lexer\+::extract\+Tokens (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{input}
+\end{DoxyParamCaption}
+)}\hypertarget{classLexer_a631154ac348ea4db3e3a06992fa6245a}{}\label{classLexer_a631154ac348ea4db3e3a06992fa6245a}
+A function that extracts token from the given input and returns a list of tokens. 
+\begin{DoxyParams}{Parameters}
+{\em input} & a std\+::string representing the input text \\
+\hline
+\end{DoxyParams}
+\index{Lexer@{Lexer}!next@{next}}
+\index{next@{next}!Lexer@{Lexer}}
+\subsubsection[{\texorpdfstring{next(const std\+::string \&stream)}{next(const std::string &stream)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::pair$<$ bool, std\+::pair$<$ std\+::string, std\+::string $>$ $>$ Lexer\+::next (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{stream}
+\end{DoxyParamCaption}
+)}\hypertarget{classLexer_afd24d0694acffafff7f705cefe2ece21}{}\label{classLexer_afd24d0694acffafff7f705cefe2ece21}
+A function that extracts the next token from the input. 
+\begin{DoxyParams}{Parameters}
+{\em stream} & a std\+::string representing the input text \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['nfa_12',['NFA',['../classNFA.html',1,'']]],
-  ['nfaloader_13',['NFALoader',['../classNFALoader.html',1,'']]]
+  ['nfa',['NFA',['../classNFA.html',1,'']]],
+  ['nfaio',['NFAIO',['../classNFAIO.html',1,'']]]
 ];
