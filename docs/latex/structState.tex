@@ -7,20 +7,17 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries State} (const std\+::string \&\hyperlink{structState_ad57f19fd0a86f129840d8739253d2c72}{name}, bool accepting=false, bool starting=false, const std\+::vector$<$ \hyperlink{structTokenInfo}{Token\+Info} $>$ \&\hyperlink{structState_a19ea4225f19a3281e2d6c890b0c09312}{payload}=std\+::vector$<$ \hyperlink{structTokenInfo}{Token\+Info} $>$())\hypertarget{structState_aa9d973d416d8de54bc8234b35bf5d602}{}\label{structState_aa9d973d416d8de54bc8234b35bf5d602}
-
+\hyperlink{structState_ab91bb1dd5aa6260ab2a456581daf9ec2}{State} ()
 \item 
-{\bfseries State} (const \hyperlink{structState}{State} \&other)\hypertarget{structState_a7325c890ee133fde5ca26eb4cea1f8ce}{}\label{structState_a7325c890ee133fde5ca26eb4cea1f8ce}
-
+\hyperlink{structState_aa9d973d416d8de54bc8234b35bf5d602}{State} (const std\+::string \&\hyperlink{structState_ad57f19fd0a86f129840d8739253d2c72}{name}, bool accepting=false, bool starting=false, const std\+::vector$<$ \hyperlink{structTokenInfo}{Token\+Info} $>$ \&\hyperlink{structState_a19ea4225f19a3281e2d6c890b0c09312}{payload}=std\+::vector$<$ \hyperlink{structTokenInfo}{Token\+Info} $>$())
 \item 
-{\bfseries State} (const \hyperlink{structState}{State} \&\&other)\hypertarget{structState_add87bf8cfa231b793bb0aa908fabf008}{}\label{structState_add87bf8cfa231b793bb0aa908fabf008}
-
+\hyperlink{structState_a7325c890ee133fde5ca26eb4cea1f8ce}{State} (const \hyperlink{structState}{State} \&other)
 \item 
-\hyperlink{structState}{State} \& {\bfseries operator=} (const \hyperlink{structState}{State} \&other)\hypertarget{structState_a57229f2db32144885eef8b7d8da598ef}{}\label{structState_a57229f2db32144885eef8b7d8da598ef}
-
+\hyperlink{structState_add87bf8cfa231b793bb0aa908fabf008}{State} (const \hyperlink{structState}{State} \&\&other)
 \item 
-\hyperlink{structState}{State} \& {\bfseries operator=} (const \hyperlink{structState}{State} \&\&other)\hypertarget{structState_ade935fb2b2db2cad19950bdefe374267}{}\label{structState_ade935fb2b2db2cad19950bdefe374267}
-
+\hyperlink{structState}{State} \& \hyperlink{structState_a57229f2db32144885eef8b7d8da598ef}{operator=} (const \hyperlink{structState}{State} \&other)
+\item 
+\hyperlink{structState}{State} \& \hyperlink{structState_ade935fb2b2db2cad19950bdefe374267}{operator=} (const \hyperlink{structState}{State} \&\&other)
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -36,7 +33,95 @@ std\+::vector$<$ \hyperlink{structTokenInfo}{Token\+Info} $>$ \hyperlink{structS
 
 
 \subsection{Detailed Description}
-\hyperlink{structState}{State} Structure Represent a state in an automata 
+\hyperlink{structState}{State} structure Represents a state in an automaton 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{State@{State}!State@{State}}
+\index{State@{State}!State@{State}}
+\subsubsection[{\texorpdfstring{State()}{State()}}]{\setlength{\rightskip}{0pt plus 5cm}State\+::\+State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{structState_ab91bb1dd5aa6260ab2a456581daf9ec2}{}\label{structState_ab91bb1dd5aa6260ab2a456581daf9ec2}
+A constructor. Constructs a default state. \index{State@{State}!State@{State}}
+\index{State@{State}!State@{State}}
+\subsubsection[{\texorpdfstring{State(const std\+::string \&name, bool accepting=false, bool starting=false, const std\+::vector$<$ Token\+Info $>$ \&payload=std\+::vector$<$ Token\+Info $>$())}{State(const std::string &name, bool accepting=false, bool starting=false, const std::vector< TokenInfo > &payload=std::vector< TokenInfo >())}}]{\setlength{\rightskip}{0pt plus 5cm}State\+::\+State (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{name, }
+\item[{bool}]{accepting = {\ttfamily false}, }
+\item[{bool}]{starting = {\ttfamily false}, }
+\item[{const std\+::vector$<$ {\bf Token\+Info} $>$ \&}]{payload = {\ttfamily std\+:\+:vector$<${\bf Token\+Info}$>$()}}
+\end{DoxyParamCaption}
+)}\hypertarget{structState_aa9d973d416d8de54bc8234b35bf5d602}{}\label{structState_aa9d973d416d8de54bc8234b35bf5d602}
+A constructor. Constructs a state with the specified parameters. 
+\begin{DoxyParams}{Parameters}
+{\em name} & -\/ std\+::string -\/ The state name. \\
+\hline
+{\em accepting} & -\/ bool -\/ Is the state accepting \\
+\hline
+{\em starting} & -\/ bool -\/ Is is a starting state \\
+\hline
+{\em payload} & -\/ std\+::vector$<$\+Token\+Info$>$ -\/ The list of tokens that the state represents \\
+\hline
+\end{DoxyParams}
+\index{State@{State}!State@{State}}
+\index{State@{State}!State@{State}}
+\subsubsection[{\texorpdfstring{State(const State \&other)}{State(const State &other)}}]{\setlength{\rightskip}{0pt plus 5cm}State\+::\+State (
+\begin{DoxyParamCaption}
+\item[{const {\bf State} \&}]{other}
+\end{DoxyParamCaption}
+)}\hypertarget{structState_a7325c890ee133fde5ca26eb4cea1f8ce}{}\label{structState_a7325c890ee133fde5ca26eb4cea1f8ce}
+A copy constructor. Constructs a \hyperlink{structState}{State} using another \hyperlink{structState}{State}. 
+\begin{DoxyParams}{Parameters}
+{\em other} & -\/ \hyperlink{structState}{State} -\/ The other \hyperlink{structState}{State}. \\
+\hline
+\end{DoxyParams}
+\index{State@{State}!State@{State}}
+\index{State@{State}!State@{State}}
+\subsubsection[{\texorpdfstring{State(const State \&\&other)}{State(const State &&other)}}]{\setlength{\rightskip}{0pt plus 5cm}State\+::\+State (
+\begin{DoxyParamCaption}
+\item[{const {\bf State} \&\&}]{other}
+\end{DoxyParamCaption}
+)}\hypertarget{structState_add87bf8cfa231b793bb0aa908fabf008}{}\label{structState_add87bf8cfa231b793bb0aa908fabf008}
+A move constructor. Constructs a \hyperlink{structState}{State} by moving another \hyperlink{structState}{State}. 
+\begin{DoxyParams}{Parameters}
+{\em other} & -\/ \hyperlink{structState}{State} -\/ The other \hyperlink{structState}{State}. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{State@{State}!operator=@{operator=}}
+\index{operator=@{operator=}!State@{State}}
+\subsubsection[{\texorpdfstring{operator=(const State \&other)}{operator=(const State &other)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State} \& State\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf State} \&}]{other}
+\end{DoxyParamCaption}
+)}\hypertarget{structState_a57229f2db32144885eef8b7d8da598ef}{}\label{structState_a57229f2db32144885eef8b7d8da598ef}
+A copy assignment operator. Assigns a \hyperlink{structState}{State} to the current \hyperlink{structState}{State} by copying it. 
+\begin{DoxyParams}{Parameters}
+{\em other} & -\/ \hyperlink{structState}{State} -\/ The other \hyperlink{structState}{State}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a reference to the current \hyperlink{structState}{State}. 
+\end{DoxyReturn}
+\index{State@{State}!operator=@{operator=}}
+\index{operator=@{operator=}!State@{State}}
+\subsubsection[{\texorpdfstring{operator=(const State \&\&other)}{operator=(const State &&other)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State} \& State\+::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf State} \&\&}]{other}
+\end{DoxyParamCaption}
+)}\hypertarget{structState_ade935fb2b2db2cad19950bdefe374267}{}\label{structState_ade935fb2b2db2cad19950bdefe374267}
+A move assignment operator. Assigns a \hyperlink{structState}{State} to the current \hyperlink{structState}{State} by moving it. 
+\begin{DoxyParams}{Parameters}
+{\em other} & -\/ \hyperlink{structState}{State} -\/ The other \hyperlink{structState}{State}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a reference to the current \hyperlink{structState}{State}. 
+\end{DoxyReturn}
+
 
 \subsection{Member Data Documentation}
 \index{State@{State}!is\+Accepting@{is\+Accepting}}

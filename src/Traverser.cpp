@@ -26,7 +26,3 @@ std::pair<bool, State> Traverser::next(const CharType& character) {
         return std::make_pair(true, mNFA.mStates.at(it->second));
     }
 }
-
-bool Traverser::isReset() const {
-    return mReset;
-}

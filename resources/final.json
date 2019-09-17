@@ -1,0 +1,341 @@
+{
+    "alphabet": "%()*+-./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz{}",
+    "states": [
+        {
+            "accepting": false,
+            "name": "S0",
+            "payload": [],
+            "starting": true
+        },
+        {
+            "accepting": true,
+            "name": "S1",
+            "payload": [
+                "MODULO"
+            ],
+            "starting": false
+        },
+        {
+            "accepting": true,
+            "name": "S2",
+            "payload": [
+                "OPENING_PARENTHESIS"
+            ],
+            "starting": false
+        },
+        {
+            "accepting": true,
+            "name": "S3",
+            "payload": [
+                "CLOSING_PARENTHESIS"
+            ],
+            "starting": false
+        },
+        {
+            "accepting": true,
+            "name": "S4",
+            "payload": [
+                "STAR"
+            ],
+            "starting": false
+        },
+        {
+            "accepting": true,
+            "name": "S5",
+            "payload": [
+                "PLUS"
+            ],
+            "starting": false
+        },
+        {
+            "accepting": true,
+            "name": "S6",
+            "payload": [
+                "MINUS"
+            ],
+            "starting": false
+        },
+        {
+            "accepting": true,
+            "name": "S7",
+            "payload": [
+                "FLOAT"
+            ],
+            "starting": false
+        },
+        {
+            "accepting": true,
+            "name": "S8",
+            "payload": [
+                "DIVISION"
+            ],
+            "starting": false
+        },
+        {
+            "accepting": true,
+            "name": "S9",
+            "payload": [
+                "NUM"
+            ],
+            "starting": false
+        },
+        {
+            "accepting": true,
+            "name": "S10",
+            "payload": [
+                "IDENTIFIER"
+            ],
+            "starting": false
+        },
+        {
+            "accepting": true,
+            "name": "S11",
+            "payload": [
+                "OPENING_SQUARE_BRACKET"
+            ],
+            "starting": false
+        },
+        {
+            "accepting": true,
+            "name": "S12",
+            "payload": [
+                "CLOSING_SQUARE_BRACKET"
+            ],
+            "starting": false
+        },
+        {
+            "accepting": true,
+            "name": "S13",
+            "payload": [
+                "OPENING_BRACKET"
+            ],
+            "starting": false
+        },
+        {
+            "accepting": true,
+            "name": "S14",
+            "payload": [
+                "CLOSING_BRACKET"
+            ],
+            "starting": false
+        },
+        {
+            "accepting": true,
+            "name": "S15",
+            "payload": [
+                "FLOAT"
+            ],
+            "starting": false
+        },
+        {
+            "accepting": false,
+            "name": "S16",
+            "payload": [],
+            "starting": false
+        },
+        {
+            "accepting": false,
+            "name": "S17",
+            "payload": [],
+            "starting": false
+        },
+        {
+            "accepting": true,
+            "name": "S18",
+            "payload": [
+                "FLOAT"
+            ],
+            "starting": false
+        }
+    ],
+    "tokensInfo": [
+        {
+            "priority": 10,
+            "type": "MODULO"
+        },
+        {
+            "priority": 10,
+            "type": "OPENING_PARENTHESIS"
+        },
+        {
+            "priority": 10,
+            "type": "CLOSING_PARENTHESIS"
+        },
+        {
+            "priority": 10,
+            "type": "STAR"
+        },
+        {
+            "priority": 10,
+            "type": "PLUS"
+        },
+        {
+            "priority": 10,
+            "type": "MINUS"
+        },
+        {
+            "priority": 10,
+            "type": "FLOAT"
+        },
+        {
+            "priority": 10,
+            "type": "DIVISION"
+        },
+        {
+            "priority": 10,
+            "type": "NUM"
+        },
+        {
+            "priority": 10,
+            "type": "IDENTIFIER"
+        },
+        {
+            "priority": 10,
+            "type": "OPENING_SQUARE_BRACKET"
+        },
+        {
+            "priority": 10,
+            "type": "CLOSING_SQUARE_BRACKET"
+        },
+        {
+            "priority": 10,
+            "type": "OPENING_BRACKET"
+        },
+        {
+            "priority": 10,
+            "type": "CLOSING_BRACKET"
+        }
+    ],
+    "transitions": [
+        {
+            "characters": "%",
+            "from": "S0",
+            "to": "S1"
+        },
+        {
+            "characters": "(",
+            "from": "S0",
+            "to": "S2"
+        },
+        {
+            "characters": ")",
+            "from": "S0",
+            "to": "S3"
+        },
+        {
+            "characters": "*",
+            "from": "S0",
+            "to": "S4"
+        },
+        {
+            "characters": "+",
+            "from": "S0",
+            "to": "S5"
+        },
+        {
+            "characters": "-",
+            "from": "S0",
+            "to": "S6"
+        },
+        {
+            "characters": ".",
+            "from": "S0",
+            "to": "S7"
+        },
+        {
+            "characters": "/",
+            "from": "S0",
+            "to": "S8"
+        },
+        {
+            "characters": "0123456789",
+            "from": "S0",
+            "to": "S9"
+        },
+        {
+            "characters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz",
+            "from": "S0",
+            "to": "S10"
+        },
+        {
+            "characters": "[",
+            "from": "S0",
+            "to": "S11"
+        },
+        {
+            "characters": "]",
+            "from": "S0",
+            "to": "S12"
+        },
+        {
+            "characters": "{",
+            "from": "S0",
+            "to": "S13"
+        },
+        {
+            "characters": "}",
+            "from": "S0",
+            "to": "S14"
+        },
+        {
+            "characters": "0123456789",
+            "from": "S7",
+            "to": "S15"
+        },
+        {
+            "characters": "Ee",
+            "from": "S7",
+            "to": "S16"
+        },
+        {
+            "characters": ".",
+            "from": "S9",
+            "to": "S7"
+        },
+        {
+            "characters": "0123456789",
+            "from": "S9",
+            "to": "S9"
+        },
+        {
+            "characters": "Ee",
+            "from": "S9",
+            "to": "S16"
+        },
+        {
+            "characters": "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz",
+            "from": "S10",
+            "to": "S10"
+        },
+        {
+            "characters": "0123456789",
+            "from": "S15",
+            "to": "S15"
+        },
+        {
+            "characters": "Ee",
+            "from": "S15",
+            "to": "S16"
+        },
+        {
+            "characters": "+-",
+            "from": "S16",
+            "to": "S17"
+        },
+        {
+            "characters": "0123456789",
+            "from": "S16",
+            "to": "S18"
+        },
+        {
+            "characters": "0123456789",
+            "from": "S17",
+            "to": "S18"
+        },
+        {
+            "characters": "0123456789",
+            "from": "S18",
+            "to": "S18"
+        }
+    ]
+}

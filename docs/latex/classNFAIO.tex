@@ -1,14 +1,55 @@
 \hypertarget{classNFAIO}{}\section{N\+F\+A\+IO Class Reference}
 \label{classNFAIO}\index{N\+F\+A\+IO@{N\+F\+A\+IO}}
+
+
+{\ttfamily \#include $<$N\+F\+A\+I\+O.\+hpp$>$}
+
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static \hyperlink{classNFA}{N\+FA} {\bfseries load\+From\+Filename} (const std\+::string \&filename)\hypertarget{classNFAIO_a06e1cedc984bdd40daef8e3d5fd2f54d}{}\label{classNFAIO_a06e1cedc984bdd40daef8e3d5fd2f54d}
-
+static \hyperlink{classNFA}{N\+FA} \hyperlink{classNFAIO_a06e1cedc984bdd40daef8e3d5fd2f54d}{load\+From\+Filename} (const std\+::string \&filename)
 \item 
-static bool {\bfseries save\+To\+File} (const \hyperlink{classNFA}{N\+FA} \&nfa, const std\+::string \&filename)\hypertarget{classNFAIO_a17b2b008419263c873e3c46ffaaf7902}{}\label{classNFAIO_a17b2b008419263c873e3c46ffaaf7902}
-
+static bool \hyperlink{classNFAIO_a17b2b008419263c873e3c46ffaaf7902}{save\+To\+File} (const \hyperlink{classNFA}{N\+FA} \&nfa, const std\+::string \&filename)
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A helper class. Used to read/write lexics. 
+
+\subsection{Member Function Documentation}
+\index{N\+F\+A\+IO@{N\+F\+A\+IO}!load\+From\+Filename@{load\+From\+Filename}}
+\index{load\+From\+Filename@{load\+From\+Filename}!N\+F\+A\+IO@{N\+F\+A\+IO}}
+\subsubsection[{\texorpdfstring{load\+From\+Filename(const std\+::string \&filename)}{loadFromFilename(const std::string &filename)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf N\+FA} N\+F\+A\+I\+O\+::load\+From\+Filename (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{filename}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classNFAIO_a06e1cedc984bdd40daef8e3d5fd2f54d}{}\label{classNFAIO_a06e1cedc984bdd40daef8e3d5fd2f54d}
+A function that reads a lexic from a file. 
+\begin{DoxyParams}{Parameters}
+{\em filename} & -\/ std\+::string -\/ The lexic file name. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{classNFA}{N\+FA} -\/ The \hyperlink{classNFA}{N\+FA} described by the lexic file 
+\end{DoxyReturn}
+\index{N\+F\+A\+IO@{N\+F\+A\+IO}!save\+To\+File@{save\+To\+File}}
+\index{save\+To\+File@{save\+To\+File}!N\+F\+A\+IO@{N\+F\+A\+IO}}
+\subsubsection[{\texorpdfstring{save\+To\+File(const N\+F\+A \&nfa, const std\+::string \&filename)}{saveToFile(const NFA &nfa, const std::string &filename)}}]{\setlength{\rightskip}{0pt plus 5cm}bool N\+F\+A\+I\+O\+::save\+To\+File (
+\begin{DoxyParamCaption}
+\item[{const {\bf N\+FA} \&}]{nfa, }
+\item[{const std\+::string \&}]{filename}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classNFAIO_a17b2b008419263c873e3c46ffaaf7902}{}\label{classNFAIO_a17b2b008419263c873e3c46ffaaf7902}
+A function that writes a lexic to a file. 
+\begin{DoxyParams}{Parameters}
+{\em nfa} & -\/ std\+::string -\/ The lexic file name. \\
+\hline
+{\em filename} & -\/ \hyperlink{classNFA}{N\+FA} -\/ The \hyperlink{classNFA}{N\+FA} representing the lexic to output. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool -\/ Returns true if it succeeded 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

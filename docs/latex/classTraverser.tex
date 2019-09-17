@@ -1,21 +1,54 @@
 \hypertarget{classTraverser}{}\section{Traverser Class Reference}
 \label{classTraverser}\index{Traverser@{Traverser}}
+
+
+{\ttfamily \#include $<$Traverser.\+hpp$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Traverser} (const \hyperlink{classNFA}{N\+FA} \&nfa)\hypertarget{classTraverser_a10f9671d521e042be51ba680c075f245}{}\label{classTraverser_a10f9671d521e042be51ba680c075f245}
-
+\hyperlink{classTraverser_a10f9671d521e042be51ba680c075f245}{Traverser} (const \hyperlink{classNFA}{N\+FA} \&nfa)
 \item 
-void {\bfseries reset} ()\hypertarget{classTraverser_a91be570afd17c4378cdcbc834c7b9670}{}\label{classTraverser_a91be570afd17c4378cdcbc834c7b9670}
-
+void \hyperlink{classTraverser_a91be570afd17c4378cdcbc834c7b9670}{reset} ()
 \item 
-std\+::pair$<$ bool, \hyperlink{structState}{State} $>$ {\bfseries next} (const Char\+Type \&character)\hypertarget{classTraverser_a5c215175cf4acf4d91fb252fb649ce5e}{}\label{classTraverser_a5c215175cf4acf4d91fb252fb649ce5e}
-
-\item 
-bool {\bfseries is\+Reset} () const \hypertarget{classTraverser_a18c4dd641ec393d47080e35bade34830}{}\label{classTraverser_a18c4dd641ec393d47080e35bade34830}
-
+std\+::pair$<$ bool, \hyperlink{structState}{State} $>$ \hyperlink{classTraverser_a5c215175cf4acf4d91fb252fb649ce5e}{next} (const Char\+Type \&character)
 \end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+The \hyperlink{classTraverser}{Traverser} class. Represents an object that move on a \hyperlink{classNFA}{N\+FA}. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Traverser@{Traverser}!Traverser@{Traverser}}
+\index{Traverser@{Traverser}!Traverser@{Traverser}}
+\subsubsection[{\texorpdfstring{Traverser(const N\+F\+A \&nfa)}{Traverser(const NFA &nfa)}}]{\setlength{\rightskip}{0pt plus 5cm}Traverser\+::\+Traverser (
+\begin{DoxyParamCaption}
+\item[{const {\bf N\+FA} \&}]{nfa}
+\end{DoxyParamCaption}
+)}\hypertarget{classTraverser_a10f9671d521e042be51ba680c075f245}{}\label{classTraverser_a10f9671d521e042be51ba680c075f245}
+A constructor. Constructs a Travserser from a \hyperlink{classNFA}{N\+FA}. 
+
+\subsection{Member Function Documentation}
+\index{Traverser@{Traverser}!next@{next}}
+\index{next@{next}!Traverser@{Traverser}}
+\subsubsection[{\texorpdfstring{next(const Char\+Type \&character)}{next(const CharType &character)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::pair$<$ bool, {\bf State} $>$ Traverser\+::next (
+\begin{DoxyParamCaption}
+\item[{const Char\+Type \&}]{character}
+\end{DoxyParamCaption}
+)}\hypertarget{classTraverser_a5c215175cf4acf4d91fb252fb649ce5e}{}\label{classTraverser_a5c215175cf4acf4d91fb252fb649ce5e}
+A function that returns the next reached state if the transition labelled with \textquotesingle{}character\textquotesingle{} exists. 
+\begin{DoxyParams}{Parameters}
+{\em character} & -\/ Char\+Type -\/ The character to look for on transitions. \\
+\hline
+\end{DoxyParams}
+\index{Traverser@{Traverser}!reset@{reset}}
+\index{reset@{reset}!Traverser@{Traverser}}
+\subsubsection[{\texorpdfstring{reset()}{reset()}}]{\setlength{\rightskip}{0pt plus 5cm}void Traverser\+::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTraverser_a91be570afd17c4378cdcbc834c7b9670}{}\label{classTraverser_a91be570afd17c4378cdcbc834c7b9670}
+A function that resets the traverse to the starting state of the \hyperlink{classNFA}{N\+FA}. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

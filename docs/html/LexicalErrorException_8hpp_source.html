@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Lexer: Class Members - Variables</title>
+<title>Lexer: include/LexicalErrorException.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -39,8 +39,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
-      <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -61,20 +61,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
-      <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
-      <li class="current"><a href="functions.html"><span>Class&#160;Members</span></a></li>
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
     </ul>
   </div>
-  <div id="navrow3" class="tabs2">
-    <ul class="tablist">
-      <li><a href="functions.html"><span>All</span></a></li>
-      <li><a href="functions_func.html"><span>Functions</span></a></li>
-      <li class="current"><a href="functions_vars.html"><span>Variables</span></a></li>
-    </ul>
-  </div>
-</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -89,22 +78,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">LexicalErrorException.hpp</div>  </div>
+</div><!--header-->
 <div class="contents">
-&#160;<ul>
-<li>isAccepting
-: <a class="el" href="structState.html#ab48af65a07f9ae4dfb880bacfbd2e812">State</a>
-</li>
-<li>isStarting
-: <a class="el" href="structState.html#a578fb1731639aab7ee201241ac00b728">State</a>
-</li>
-<li>name
-: <a class="el" href="structState.html#ad57f19fd0a86f129840d8739253d2c72">State</a>
-</li>
-<li>payload
-: <a class="el" href="structState.html#a19ea4225f19a3281e2d6c890b0c09312">State</a>
-</li>
-</ul>
-</div><!-- contents -->
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef __LEXICAL_ERROR_EXCEPTION_HPP__</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define __LEXICAL_ERROR_EXCEPTION_HPP__</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;stdexcept&gt;</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div><div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classLexicalErrorException.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="classLexicalErrorException.html">LexicalErrorException</a> : <span class="keyword">public</span> std::runtime_error {</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <a class="code" href="classLexicalErrorException.html#a9ccea8291962d41fd6e215e6460e0bd0">LexicalErrorException</a>(<span class="keyword">const</span> std::string&amp; msg = <span class="stringliteral">&quot;&quot;</span>);</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;};</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#endif</span></div><div class="ttc" id="classLexicalErrorException_html"><div class="ttname"><a href="classLexicalErrorException.html">LexicalErrorException</a></div><div class="ttdef"><b>Definition:</b> LexicalErrorException.hpp:9</div></div>
+<div class="ttc" id="classLexicalErrorException_html_a9ccea8291962d41fd6e215e6460e0bd0"><div class="ttname"><a href="classLexicalErrorException.html#a9ccea8291962d41fd6e215e6460e0bd0">LexicalErrorException::LexicalErrorException</a></div><div class="ttdeci">LexicalErrorException(const std::string &amp;msg=&quot;&quot;)</div><div class="ttdef"><b>Definition:</b> LexicalErrorException.cpp:3</div></div>
+</div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
