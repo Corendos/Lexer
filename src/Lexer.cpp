@@ -32,7 +32,7 @@ std::vector<std::pair<std::string, std::string>> Lexer::extractTokens(const std:
             // to the list of tokens (if it exists)
             if (mCurrentPosition == input.length()) {
                 if (!mHasLastValidState) {
-                    std::string unknownToken(input, mStartPosition, mLastStartPosition - mStartPosition);
+                    std::string unknownToken(input, mStartPosition, mCurrentPosition + 1 - mStartPosition);
                     throw LexicalErrorException("\"" + unknownToken + "\" is not a valid token.");
                 }
 
@@ -49,7 +49,7 @@ std::vector<std::pair<std::string, std::string>> Lexer::extractTokens(const std:
                 }
             } else {
                 if (!mHasLastValidState) {
-                    std::string unknownToken(input, mStartPosition, mLastStartPosition - mStartPosition);
+                    std::string unknownToken(input, mStartPosition, mCurrentPosition + 1 - mStartPosition);
                     throw LexicalErrorException("\"" + unknownToken + "\" is not a valid token.");
                 }
                 tokens.push_back(getLastToken(input));
@@ -104,7 +104,11 @@ std::pair<bool, std::pair<std::string, std::string>> Lexer::next(const std::stri
                     mStartPosition++;
                 }
             } else {
-                assert(mHasLastValidState);
+                // !! Not tested !!
+                if (!mHasLastValidState) {
+                    std::string unknownToken(stream, mStartPosition, mCurrentPosition + 1 - mStartPosition);
+                    throw LexicalErrorException("\"" + unknownToken + "\" is not a valid token.");
+                }
 
                 returnedValue = getLastToken(stream);
                 mTempBuffer.clear();
