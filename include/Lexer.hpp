@@ -20,28 +20,32 @@ class Lexer {
 
         /**
          * A function that extracts token from the given input and returns a list of tokens.
-         * @param input a std::string representing the input text
+         * @param input a std::string representing the input text.
+         * @return std::vector<std::pair<std::string, std::string>> - The list of pair of tokens and their types.
          */
         std::vector<std::pair<std::string, std::string>> extractTokens(const std::string& input);
 
         /**
          * A function that extracts the next token from the input.
-         * @param stream a std::string representing the input text
+         * @param stream a std::string representing the input text.
+         * @return std::pair<bool, std::pair<std::string, std::string>> - A pair containing a boolean indicating if a
+         *         token has been extracted and if so, the pair containing the token ans its type.
          */
         std::pair<bool, std::pair<std::string, std::string>> next(const std::string& stream);
 
     private:
-        Traverser mTraverser;       //< A helper class that traverse the nfa graph
-        State mLastValidState;      //< The last detected valid state
-        bool mHasLastValidState;    //< A boolean indicating if the lexer has found a valid state
-        size_t mLastStartPosition;  //< An index representing the position where to restart after having returned a token
-        size_t mCurrentPosition;    //< An index representing the current position in the input stream
-        size_t mStartPosition;      //< An index representing the position where the current read token started
-        std::string mTempBuffer;    //< A temporary buffer to store the read token
+        Traverser mTraverser;       //< A helper class that traverse the nfa graph.
+        State mLastValidState;      //< The last detected valid state.
+        bool mHasLastValidState;    //< A boolean indicating if the lexer has found a valid state.
+        size_t mLastStartPosition;  //< An index representing the position where to restart after having returned a token.
+        size_t mCurrentPosition;    //< An index representing the current position in the input stream.
+        size_t mStartPosition;      //< An index representing the position where the current read token started.
+        std::string mTempBuffer;    //< A temporary buffer to store the read token.
 
         /**
-         * A function that return the last detected token using the various indices
-         * @param input a std::string representing the input text
+         * A function that return the last detected token using the various indices.
+         * @param input a std::string representing the input text.
+         * @return std::pair<std::string, std::string> - The token and its type.
          */
         std::pair<std::string, std::string> getLastToken(const std::string& input);
 };

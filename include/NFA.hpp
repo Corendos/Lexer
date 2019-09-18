@@ -75,19 +75,19 @@ class NFA {
         NFA& operator=(NFA&& other) = default;
 
         /**
-         * Add a state to the NFA by copying it.
+         * Adds a state to the NFA by copying it.
          * @param state The State to add.
          */
         void addState(const State& state);
 
         /**
-         * Add a state to the NFA by moving it.
+         * Adds a state to the NFA by moving it.
          * @param state The State to add.
          */
         void addState(State&& state);
 
         /**
-         * Add a transition labelled by a specific character.
+         * Adds a transition labelled by a specific character.
          * @param from The State where the transition comes from.
          * @param from The character laebelling the transition.
          * @param to The State where the transition goes to.
@@ -95,14 +95,14 @@ class NFA {
         void addTransition(const State& from, const CharType& character, const State& to);
 
         /**
-         * Add an empty transition.
+         * Adds an empty transition.
          * @param from The State where the transition comes from.
          * @param to The State where the transition goes to.
          */
         void addTransition(const State& from, /*       Empty         */  const State& to);
 
         /**
-         * Add transitions labelled by specific characters.
+         * Adds transitions labelled by specific characters.
          * @param from The State where the transitions come from.
          * @param from The characters labelling the transitions.
          * @param to The State where the transitions go to.
@@ -111,7 +111,7 @@ class NFA {
 
 
         /**
-         * Add a transition labelled by a specific character.
+         * Adds a transition labelled by a specific character.
          * @param from The state name where the transition comes from.
          * @param from The character laebelling the transition.
          * @param to The state name where the transition goes to.
@@ -119,14 +119,14 @@ class NFA {
         void addTransition(const std::string& from, const CharType& character, const std::string& to);
 
         /**
-         * Add an empty transition.
+         * Adds an empty transition.
          * @param from The state name where the transition comes from.
          * @param to The state name where the transition goes to.
          */
         void addTransition(const std::string& from, /*       Empty         */  const std::string& to);
 
         /**
-         * Add transitions labelled by specific characters.
+         * Adds transitions labelled by specific characters.
          * @param from The state name where the transitions come from.
          * @param from The characters labelling the transitions.
          * @param to The state name where the transitions go to.
@@ -140,16 +140,16 @@ class NFA {
         void printDebug() const;
 
         /**
-         * Transform a NFA to a DFA.
-         * @return a NFA representing the corresponding DFA
+         * Transforms a NFA to a DFA.
+         * @return a NFA representing the corresponding DFA.
          */
         NFA toDFA() const;
 
         /**
-         * Combine multiple NFAs to a single NFA
+         * Combines multiple NFAs to a single NFA
          * 
-         * @param nfas  the list of NFA we want to combine
-         * @return      the resulting NFA
+         * @param nfas - std::vector<NFA> - the list of NFA we want to combine.
+         * @return NFA - the resulting NFA.
          */
         static NFA combine(const std::vector<NFA>& nfas);
 

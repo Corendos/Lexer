@@ -4,7 +4,7 @@
 #include <stdexcept>
 
 /**
- * An exception class. Thrown when a lexical error has been detected
+ * An exception class. Thrown when a lexical error has been detected.
  */
 class LexicalErrorException : public std::runtime_error {
     public:

@@ -21,9 +21,11 @@ class Traverser {
         void reset();
 
         /**
-         * A function that returns the next reached state if the transition labelled with 'character'
+         * A function that returns the next reached state if the transition labelled with 'character'.
          * exists.
          * @param character - CharType - The character to look for on transitions.
+         * @return std::pair<bool, State> - A pair containing a boolean indicating if a transition hase been found
+         *                                  and if so the corresponding State.
          */
         std::pair<bool, State> next(const CharType& character);
     
