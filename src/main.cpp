@@ -10,12 +10,10 @@
 
 
 int main() {
-    NFA numLexic = NFAIO::loadFromFilename("../resources/num_lexic.json");
-    NFA floatLexic = NFAIO::loadFromFilename("../resources/float_lexic.json");
     std::vector<NFA> nfas = {
         NFAIO::loadFromFilename("../resources/identifier_lexic.json"),
         NFAIO::loadFromFilename("../resources/operator_lexic.json"),
-        numLexic,
+        NFAIO::loadFromFilename("../resources/num_lexic.json"),
         NFAIO::loadFromFilename("../resources/float_lexic.json")
     };
 
@@ -23,13 +21,16 @@ int main() {
 
     NFA dfa = combined.toDFA();
 
-    dfa.printDebug();
-
     NFAIO::saveToFile(dfa, "../resources/final.json");
 
     Lexer lexer(dfa);
 
-    std::string input = "1 + 2 * (3e-2 * (2 -& 4))";
+    std::string input = "1 + 2 * (3e-2 * (2 - 4))";
+
+    std::cout << "The input string is: " << input << std::endl;
+
+    std::cout << "Extracted tokens:" << std::endl;
+
     for (const auto& elt : lexer.extractTokens(input)) {
         std::cout << elt.first << "  " << elt.second << std::endl;
     }
